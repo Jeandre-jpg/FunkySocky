@@ -251,6 +251,9 @@ Access your running application to the given **Hosting URL**.
 
 ### ERD-Diagram
 
+<p align="center">
+ <img src="https://user-images.githubusercontent.com/55391556/167740623-8bc78adb-a689-4aae-8bef-2ba6654f982a.png"/> 
+</p>
 
 ## Development Process
 
