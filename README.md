@@ -2,8 +2,9 @@
   FunkySocky
   </h1> 
 <h1 align="center">
-  <img src="https://user-images.githubusercontent.com/55391556/155717453-752decef-3340-4ecc-8599-fee58a7a64d9.png" alt="logo" width="200" height="200">
+  <img src="https://user-images.githubusercontent.com/55391556/167642356-6b232b46-4824-4f55-bdd8-ab2576ddf58f.png" alt="logo" width="400" height="300">
 </h1>  
+
 <p align="center">
   <h1 align="center">Still make your toes wiggle</h1>
   </p>
@@ -82,7 +83,7 @@ For this project, I chose to create a design-build competition around the design
     <li>
       <a href="#development-process">Development Process</a>
       <ul>
-         <li><a href="#highlights-andchallenges">Highlights and Challenges</a></li>
+         <li><a href="#highlights-and-challenges">Highlights and Challenges</a></li>
          <li><a href="#scope-planning">Scope Planning</a></li>
       </ul>
     </li>
@@ -146,11 +147,30 @@ There are multiple cross-platform frameworks to choose from, with React Native b
 ## Getting Started
 
 To get a local copy up and running follow these simple steps.
+  
+  - Create your Firebase Project in `http://console.firebase.google.com`.
+- Copy config in dashboard's  **Web Setup** and paste to `App.js`.
+- Clone project and install dependencies.
+```
+> git clone 
+> cd react-firebase
+> npm install
+```
 
 ### Prerequisites
 
 #### Hardware requirements :
 
+  
+###  What is required for ReactJS?
+  
+- HTML + CSS
+
+- At a high level, React developers should be able to: Work with and write semantic HTML tags. Work with and write CSS selectors. Implement a CSS reset.
+  
+### Is server required for ReactJS?
+  
+- You don't necessarily need a static server in order to run a Create React App project in production. It also works well when integrated into an existing server side app.
 
   
 #### Programing languages that one must know :
@@ -160,60 +180,78 @@ To get a local copy up and running follow these simple steps.
 ### Installation
 Here are a couple of ways to clone this repo:
 
+### Deployment process with firebase
+1. Install **Firebase Tools** globally. (You may need `sudo` here)
+```
+> npm install -g firebase-tools
+```
+2. Login to firebase using this tool in CLI
+```
+> firebase login
+```
+3. CD to your working project and initialize firebase.
+```
+> cd react-firebase
+> firebase init
+```
+4. Configure firebase:
+- Allow CLI features for **Database**, **Functions**, **Hosting**.
+- Select your Firebase project to be used.
+- Accept default rules to write on default file `database.rules.json`
+- Install dependencies.
+- Choose a `build` name directory since we build our app.
+- Select **Yes** for configuring single app page. This is suitable also when app is using `react-router`.
+- **Firebase initialization complete!**
+
+5. Then we will build our app.
+```
+> npm build
+```
+6. Deploy!
+```
+> firebase deploy
+```
+Access your running application to the given **Hosting URL**.
+
+**__Important__**
+- Make sure to rebuild your app if you made changes and want to deploy again.
+- If you only edited the firebase-generated folder `functions/**`, you can just deploy by running `firebase deploy --only functions`.
 
 
 ### Features and Functions
 
+  <p>
+ <img src="https://user-images.githubusercontent.com/55391556/167738082-2960d698-91eb-4151-b059-74d2a29748c3.jpg" width="1400" height="600"/> 
+</p>
 
 
 ## Concept Process
 
 ### Ideation
+  <p>
+ <img src="https://user-images.githubusercontent.com/55391556/167644282-00d75861-c44a-441b-a783-e3418bc0fc47.jpg" width="1400" height="600"/> 
 
-<p>
- <img src="" width="1400" height="600"/> 
-
- <img src="" width="1400" height="600"/> 
-</p>
-
-<p align="center">
- <img src="" width="1400" height="600"/> 
+ <img src="https://user-images.githubusercontent.com/55391556/167644399-53453585-412f-4bf8-bd36-63ea58ab052e.jpg" width="1400" height="600"/> 
 </p>
 
 ### Wireframes
 
-
 <p>
- <img src="" width="1400" height="600"/> 
-  
-  <img src="" width="1400" height="600"/> 
-</p>
-
-<p>
- <img src="" width="1400" height="600"/> 
-  
-  <img src="" width="1400" height="600"/> 
+ <img src="https://user-images.githubusercontent.com/55391556/167737734-72224ace-3f85-44fe-bff0-31641dc07a1c.jpg" width="1400" height="2000"/> 
 </p>
 
 
-<p>
- <img src="" width="1400" height="600"/> 
-  
-  <img src="" width="1400" height="600"/> 
-</p>
-
-<p align="center">
- <img src="" width="1400" height="600"/> 
-</p>
 
 ### User-Flow Diagram
 
 
 <p align="center">
- <img src=""/> 
+ <img src="https://user-images.githubusercontent.com/55391556/167650437-41df8171-adb4-4d6a-8a85-fb6256baccc3.jpg"/> 
 </p>
 
-  
+### ERD-Diagram
+
+
 ## Development Process
 
 
@@ -296,7 +334,7 @@ Contributions are what make the open source community such an amazing place to b
 ## Authors
 
 <p align="center">
- <img src=""/> 
+ <img src="https://user-images.githubusercontent.com/55391556/167643610-31bb78a2-2ddf-4f0f-ac9f-ea9d1d69dbcd.jpg"/> 
 </p>
 
 
@@ -327,4 +365,8 @@ Project Link: [https://github.com/Jeandre-jpg/MonsterHunterWorld](https://github
 
 
 ## Acknowledgements
-1.
+1. A-Design Award and Competition. 2022. Design Competition Organization Guidelines. https://competition.adesignaward.com/design-competition-organization-guidelines.html (Accessed 2 May 2022).
+2. Cole + Parker USA. 2022. https://coleandparker.store/ (Accessed 2 May 2022).
+3. Guggenheimer, T. 2017. A Brief History of the Design Competition. https://bluprint.onemega.com/a-brief-history-of-the-design-competition/#:~:text=Several%20distinct%20sub%2Dtypes%20of,limited%20competition%2C%20an%20invited%20competition%2C (Accessed 2 May 2022).
+4. 50 Fun Competition Ideas You Can Use in 2022. https://blog.wishpond.com/post/115675437179/fun-contest-ideas (Accessed 2 May 2022).
+5. Pintillie, D. 2019. Understanding the Meaning of Color Within Design. Specky Boy. https://speckyboy.com/understanding-and-the-meaning-of-color-within-design/ (Accessed 10 May 2022).
