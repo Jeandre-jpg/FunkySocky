@@ -2,12 +2,30 @@ import { StyleSheet, Text, View } from 'react-native';
 import * as SplashScreen from 'expo-splash-screen';
 import { NavigationContainer } from '@react-navigation/native';
 import React, {useState} from 'react';
+import AppLoading from 'expo-app-loading';
+import useFonts from './assets/hooks/useFonts';
 import UserStack from './components/dashboardcomps/UserStack';
 
 export default function App() {
 
+  const [IsReady, SetIsReady] = useState(false);
+
+  const LoadFonts = async () => {
+    await useFonts();
+  };
+
+  if (!IsReady) {
+    return (
+      <AppLoading
+        startAsync={LoadFonts}
+        onFinish={() => SetIsReady(true)}
+        onError={() => {}}
+      />
+    );
+  }
+
   SplashScreen.preventAutoHideAsync();
-  setTimeout(SplashScreen.hideAsync, 5000);
+  setTimeout(SplashScreen.hideAsync, 2000);
 
   return (
     <NavigationContainer style={styles.container}>

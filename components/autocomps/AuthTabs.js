@@ -29,10 +29,10 @@ export default function AuthTabs() {
            } 
 
            },
-           tabBarActiveTintColor: 'tomato'
+           tabBarActiveTintColor: 'black'
        })}>
-          <Tab.Screen name="Login" component={Login} options={{title: "Welcome", headerTintColor:"#fff", headerStyle: {backgroundColor: '#52307c'}}}></Tab.Screen>
-          <Tab.Screen name="Register" component={Register} options={{title: "Join Us", headerTintColor: '#fff', headerStyle: {backgroundColor: '#f5347f'}, headerRight: () => (
+          <Tab.Screen name="Login" component={Login} options={{title: "Sign In", headerTintColor:"#E8D3B4", headerStyle: {backgroundColor: '#E8D3B4'}}}></Tab.Screen>
+          <Tab.Screen name="Register" component={Register} options={{title: "Sign Up", headerTintColor: '#E8D3B4', headerStyle: {backgroundColor: '#E8D3B4'}, headerRight: () => (
               <Button 
               title='info'
               color='#fff'

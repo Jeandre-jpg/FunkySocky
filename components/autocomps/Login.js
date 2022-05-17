@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import { StyleSheet, Text, View, Alert, TextInput, TouchableOpacity , Button, Image} from 'react-native';
 import loginIcon from '../../assets/enter.png';
 
+
 export default function Login() {
 
     const handleLoginPress = () => {
@@ -11,61 +12,87 @@ export default function Login() {
     const [password, onPasswordChange] = useState("");
 
   return (
+    
     <View style={styles.container}>
 
-        <Image
-            style={{width: 50, height: 50, marginTop: 20, padding: 30}}
-            source={loginIcon}
-        />
-
-      <Text style={styles.heading}>Login</Text>
+      <Text style={styles.fontText1}>Sign In</Text>
+      <Text style={styles.fontText2}>Life is worth the living with a pair! So grab your funky sockies today.</Text>
+     
       <TextInput
           style={styles.input}
-          placeholder = "Your Email"
+          placeholder = "Email"
           value={email}
           onChangeText={onEmailChange}
           />
       <TextInput
           style={styles.input}
-          placeholder = "Your Password"
+          placeholder = "Password"
           value={password}
           onChangeText={onPasswordChange}
           secureTextEntry={true}
     />
 
+
+<View style={{ backgroundColor: '#E8D3B4', flexDirection: 'row'}}>
+
     <TouchableOpacity onPress={handleLoginPress}>
-        <View><Text style={styles.loginButton}>Login</Text></View>
+        <View>
+          <Text style={styles.fontText3 }>Sign In</Text>
+          <Image source={loginIcon} style={{width: 40, height: 40, marginTop: -40, marginLeft: 270, marginBottom: 100}}/>
+          </View>
     </TouchableOpacity>
+    </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-    container: {
-        padding: 20
-      },
+  container: {
+    padding: 20,
+    backgroundColor: '#E8D3B4'
+  },
   heading: {
-      fontSize: 24,
-      fontWeight: 'bold',
-      color: '#52307C',
-      marginTop: 20
+    fontSize: 35,
+    fontWeight: 'bold',
+    color: '#000000',
+    marginTop: 20
+  },
+  fontText1: {
+    fontFamily: 'OleoScript-Regular',
+    fontSize: 40,
+    marginTop: 80
+  },
+  fontText2: {
+    fontFamily: 'Montserrat-Regular',
+    fontSize: 13,
+    marginTop: 30,
+    marginBottom: 10
+  },
+  fontText3: {
+    fontFamily: 'OleoScript-Regular',
+    fontSize: 30,
+    marginTop: 80
   },
   input:{
-    borderWidth: 1,
+    borderBottomColor: '#000000',
+    borderBottomWidth: 2,
+    marginBottom: 10,
     padding: 10,
-    marginTop: 20,
-    borderRadius: 30,
+    fontFamily: 'Poppins-ExtraBold',
+    fontSize: 30,
+    marginTop: 40,
     paddingLeft: 20,
-    borderColor: '#52307C',
     marginBottom: 10
   },
   loginButton: {
-      marginTop: 30,
-      borderRadius: 30,
-      backgroundColor:  '#52307C',
-      padding: 20,
+      marginTop: 10,
       color: '#fff',
       textAlign: 'center',
-      fontWeight: 'bold'
+      fontWeight: 'bold',
+      width: 50, 
+      height: 50, 
+      marginTop: 20, 
+      padding: 30,
+      flexDirection: 'row'
   }
 });
