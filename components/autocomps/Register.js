@@ -14,15 +14,24 @@ const Stack = createNativeStackNavigator();
 
 export default function Register({navigation}) {
 
-  const options = [
-      'one', 'two', 'three'
-    ];
-
-    const defaultOption = options[0];
-
   const handleRegisterPress = () => {
-      Alert.alert(email+ "" + username + " with password " + password + " registerd.")
-      setLoading(true)
+  
+    setLoading(true)
+
+    createUserWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+        const user = userCredential.user;
+        Alert.alert(user.uid);
+        setLoading(false)
+    })
+    .catch((error) => {
+        Alert.alert(error.message);
+        setLoading(false)
+    });
+
+  // const handleRegisterPress = () => {
+  //     Alert.alert(email+ "" + username + " with password " + password + " registerd.")
+  //     setLoading(true)
 
   }
   const [username, onUsernameChange] = useState("");
