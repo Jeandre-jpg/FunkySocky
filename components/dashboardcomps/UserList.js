@@ -1,5 +1,7 @@
 import React, {useState} from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, ScrollView} from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, ScrollView, Button} from 'react-native';
+import { signOut } from 'firebase/auth';
+import { auth } from '../../firebase';
 
 export default function UserList({ navigation }) {
 
@@ -13,9 +15,20 @@ export default function UserList({ navigation }) {
         {name: 'Gordan', role: 'Student'}
     ]
     
+const onSignOutPress = () => {
+//success
+        signOut(auth).then(() => {
+            
+        }).catch((error) => {
+            Alert.alert(error.message);         
+        })  
+}
 
   return (
     <View>
+
+        <Button title='Sign Out' onPress={onSignOutPress}/>
+
         <Text style={styles.heading}>All the users</Text>
         <ScrollView style={{paddingBottom: 130}}>
             {users. map((user, index) => (

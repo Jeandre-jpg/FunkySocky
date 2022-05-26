@@ -1,22 +1,24 @@
 import React, {useState} from 'react';
 import { StyleSheet, Text, View, Alert, TextInput, TouchableOpacity , Button, Image} from 'react-native';
 import loginIcon from '../../assets/enter.png';
+import { auth } from '../../firebase';
 import { getAuth, signInWithEmailAndPassword, signOut } from 'firebase/auth';
-
-
-export default function Login() {
+export default function Login({navigation}) {
 
     const handleLoginPress = () => {
-      signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-          const user = userCredential.user;
-          Alert.alert(user.uid);
-         
-      })
-      .catch((error) => {
-          Alert.alert(error.message);
-         
-      });
+
+      
+
+        signInWithEmailAndPassword(auth, email, password)
+        .then((userCredentials) => {
+            const user = userCredentials.user;
+            Alert.alert(user.uid);
+            navigation.replace("Users");
+        })
+        .catch((error) => {
+            Alert.alert(error.message);
+           
+        });
     }
     const [email, onEmailChange] = useState("");
     const [password, onPasswordChange] = useState("");
