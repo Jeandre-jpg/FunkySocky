@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, Alert, TextInput, TouchableOpacity , Button, Im
 import loginIcon from '../../assets/enter.png';
 import { auth } from '../../firebase';
 import { getAuth, signInWithEmailAndPassword, signOut } from 'firebase/auth';
+
 export default function Login({navigation}) {
 
     const handleLoginPress = () => {
@@ -13,7 +14,7 @@ export default function Login({navigation}) {
         .then((userCredentials) => {
             const user = userCredentials.user;
             Alert.alert(user.uid);
-            navigation.replace("Users");
+            navigation.replace("Competitions");
         })
         .catch((error) => {
             Alert.alert(error.message);

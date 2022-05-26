@@ -10,6 +10,8 @@
     "eject": "expo eject"
   },
   "dependencies": {
+    "@coreui/react": "^4.2.2",
+    "@popperjs/core": "^2.11.5",
     "@react-navigation/bottom-tabs": "^6.3.1",
     "@react-navigation/drawer": "^6.4.1",
     "@react-navigation/native": "^6.0.10",

@@ -1,6 +1,7 @@
 import loginIcon from '../../assets/enter.png';
+
 import React, {useState} from 'react';
-import { StyleSheet, Text, View, Alert, TextInput, TouchableOpacity , Button, ActivityIndicator, Image} from 'react-native';
+import { StyleSheet, Text, View, Alert, TextInput, TouchableOpacity , Button, ActivityIndicator, Image, Dropdown, DropdownToggle, DropdownMenu} from 'react-native';
 import { getAuth, createUserWithEmailAndPassword, signOut } from 'firebase/auth';
 import { auth } from '../../firebase';
 
@@ -9,6 +10,8 @@ export default function Register({navigation}) {
   const [username, onUsernameChange] = useState("");
   const [email, onEmailChange] = useState("");
   const [password, onPasswordChange] = useState("");
+  const [adminrole, onAdminRoleChange] = useState("");
+  const [studentrole, onStudentRoleChange] = useState("");
   const [loading, setLoading] = useState(false);
 
   const handleRegisterPress = () => {
@@ -64,6 +67,26 @@ return (
           onChangeText={onPasswordChange}
           secureTextEntry={true}
     />
+
+<Dropdown>
+  <DropdownToggle variant="success" id="dropdown-basic">
+   Role
+  </DropdownToggle>
+
+  <DropdownMenu>
+    <Dropdown.Item 
+          value={adminrole}
+          onChangeText={onAdminRoleChange}
+          secureTextEntry={true}>Admin
+          </Dropdown.Item>
+
+          <Dropdown.Item 
+          value={studentrole}
+          onChangeText={onStudentRoleChange}
+          secureTextEntry={true}>Student
+          </Dropdown.Item>
+  </DropdownMenu>
+</Dropdown>
 
 <View style={{ backgroundColor: '#E8D3B4', flexDirection: 'row', marginTop: -5}}>
 
