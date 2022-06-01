@@ -4,6 +4,7 @@ import React, {useState} from 'react';
 import { StyleSheet, Text, View, Alert, TextInput, TouchableOpacity , Button, ActivityIndicator, Image, Dropdown, DropdownToggle, DropdownMenu} from 'react-native';
 import { getAuth, createUserWithEmailAndPassword, signOut } from 'firebase/auth';
 import { auth } from '../../firebase';
+import { createUserOnRegister } from '../../Database';
 
 export default function Register({navigation}) {
 
@@ -22,6 +23,7 @@ export default function Register({navigation}) {
       .then((userCredential) => {
           const user = userCredential.user;
           Alert.alert(user.uid);
+          createUserOnRegister(user, username)
           setLoading(false)
       })
       .catch((error) => {
@@ -68,7 +70,7 @@ return (
           secureTextEntry={true}
     />
 
-<Dropdown>
+{/* <Dropdown>
   <DropdownToggle variant="success" id="dropdown-basic">
    Role
   </DropdownToggle>
@@ -86,7 +88,7 @@ return (
           secureTextEntry={true}>Student
           </Dropdown.Item>
   </DropdownMenu>
-</Dropdown>
+</Dropdown> */}
 
 <View style={{ backgroundColor: '#E8D3B4', flexDirection: 'row', marginTop: -5}}>
 

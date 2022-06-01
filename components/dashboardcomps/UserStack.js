@@ -45,11 +45,11 @@ export default function UserStack() {
       tabBarIcon: ({ focused, color, size }) => {
         let iconName;
 
-           if (route.name === "Profile"){
+           if (route.name === "Competitions"){
             iconName = focused
-                return <Image source={profile} style={{width: 20, height: 20}}/>
-           }else if (route.name === "Competitions"){
-               return <Image source= {comps} style={{width: 20, height: 20}}/>
+                return <Image source={comps} style={{width: 20, height: 20}}/>
+           }else if (route.name === "Profile"){
+               return <Image source= {profile} style={{width: 20, height: 20}}/>
           } else if (route.name === "Design"){       
               return <Image source= {design} style={{width: 20, height: 20}}/>
           } else if (route.name === "Product"){       
@@ -61,10 +61,11 @@ export default function UserStack() {
    })}>
       {loggedIn ? (
         <>
+         <Tab.Screen name="Competitions" component={Competitions}options={{title: "Competitions", headerTintColor:"#E8D3B4", headerStyle: {backgroundColor: '#E8D3B4'}}}></Tab.Screen>
         <Tab.Screen name="Product" component={Product}options={{title: "Product", headerTintColor:"#E8D3B4", headerStyle: {backgroundColor: '#E8D3B4'}}}></Tab.Screen>
-        <Tab.Screen name="Design" component={Design}options={{title: "Competitions", headerTintColor:"#E8D3B4", headerStyle: {backgroundColor: '#E8D3B4'}}}></Tab.Screen>
+        <Tab.Screen name="Design" component={Design}options={{title: "Design", headerTintColor:"#E8D3B4", headerStyle: {backgroundColor: '#E8D3B4'}}}></Tab.Screen>
         <Tab.Screen name="Profile" component={Profile} options={{title: "Profile", headerTintColor:"#E8D3B4", headerStyle: {backgroundColor: '#E8D3B4'}}}></Tab.Screen>
-        <Tab.Screen name="Competitions" component={Competitions}options={{title: "Competitions", headerTintColor:"#E8D3B4", headerStyle: {backgroundColor: '#E8D3B4'}}}></Tab.Screen>
+       
      
       
       </>

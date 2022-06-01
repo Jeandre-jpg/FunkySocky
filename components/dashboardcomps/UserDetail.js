@@ -1,147 +1,210 @@
-import React from 'react';
-import { StyleSheet, Text, Button, SafeAreaView} from 'react-native';
+import React, { useState, useEffect} from 'react';
+import { auth } from '../../firebase';
+import { StyleSheet, Text, Button, SafeAreaView, View, TouchableOpacity, Image} from 'react-native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { getAvatar } from '../../Database';
+import addIcon from '../../assets/add.png';
+import avatarIcon from '../../assets/man.png';
 
 const Stack = createNativeStackNavigator();
 
+const competitions = [
+  {name: 'Spring Hickety', role: 'Open'}
+]
 
 
-export default function UserStack({ route, navigation }) {
+export default function UserDetail({ route, navigation }) {
 
     const currentProfile = route.params;
+
+    const [avatar, setAvatars]= useState([]);
+
+    useEffect(() => {
+      fetchAvatar();
+      }, [])
+      
+      const fetchAvatar = async () => {
+        const database = await getAvatar();
+        setAvatars(database);
+        console.log(database);
+
+
+
+      }
+
 
   return (
    
     
 
-    //       <Button title="Again!" color="#841584" onPress={() => navigation.push("Profile", currentProfile)} />
 
-    //       <Button title="GO BACK" color="red" onPress={() => navigation.goBack()} />
+  <View style={styles.container}>
 
-    //       <Button title="GO TO TOP" color="orange" onPress={() => navigation.popToTop()} />
-    // </SafeAreaView>
-       
-
-
-<SafeAreaView style={styles.container}>
+     <Image source={avatarIcon} style={{width: 150, height: 150, justifyContent: 'center', marginLeft: 130, marginTop: 50}}/>
     
-    
+<Text style={styles.fontText1}>Hi, {avatar.username}</Text>
 
-{/* <Text style={styles.heading}>{currentProfile.name}</Text>
-<Text style={styles.subheading}>{currentProfile.role}</Text> */}
-<Text style={styles.subheading3}>Life is worth the living with a pair! So grab your funky sockies today.</Text> 
-<Text style={styles.subheading2}>What's going on</Text> 
+<Text style={styles.fontText2}>Life is worth the living with a pair! So grab your funky sockies today.</Text> 
+
 
 
 <SafeAreaView style={styles.container2}>
+<Text style={styles.fontText3}>What's going on</Text> 
+<SafeAreaView style={styles.card}>
+<Text style={{color: 'white', fontFamily: 'OleoScript-Regular', fontSize: 20, paddingLeft: 20}}>Current Competitions</Text>
+</SafeAreaView>
+<View style={styles.container4}>
+  {competitions. map((competition, index) => (
+            <TouchableOpacity key={index} onPress={() => navigation.navigate("Product")}>
+                <View key={index} style={styles.CompButton}>
+                    <Text>{competition.name}</Text>
+                    <Text>{competitions.role}</Text>
+                </View>
+                </TouchableOpacity>
+                
+            ))}
 
-  <SafeAreaView style={styles.view}>
-  <Text style={styles.heading2}>Current Competition Entries</Text> 
-  </SafeAreaView>
+{competitions. map((competition, index) => (
+            <TouchableOpacity key={index} onPress={() => navigation.navigate("CompList")}>
+                <View key={index} style={styles.CompButton}>
+                    <Text>See More</Text>
+                    <Text>{competitions.role}</Text>
+                </View>
+                </TouchableOpacity>
+                
+            ))}
+            </View>
+
+<SafeAreaView style={styles.card}>
+<Text style={{color: 'white', fontFamily: 'OleoScript-Regular', fontSize: 20, paddingLeft: 20}}>Current Entries</Text>
+</SafeAreaView>
+<View style={styles.container4}>
+{competitions. map((add, index) => (
+            <TouchableOpacity key={index} onPress={() => navigation.navigate("CompList")}>
+                <View key={index} style={styles.CompButton2}>
+                <Image source={addIcon} style={{width: 30, height: 30}}/>
+                    <Text>{competitions.role}</Text>
+                </View>
+                </TouchableOpacity>
+                
+            ))}
+            </View>
+
 </SafeAreaView>
 
 
-<SafeAreaView style={styles.container3}>
-  
-<SafeAreaView style={styles.view}>
-  <Text style={styles.heading2}>Current Engagement</Text>
-</SafeAreaView>
-</SafeAreaView>
 
-</SafeAreaView>
+</View>
 );
 }
 
+
 const styles = StyleSheet.create({
-container: {
-  paddingTop: 10,
-  backgroundColor: '#ffffff',
-  paddingBottom: 250
-},
-container2: {
-flex: 1, 
-flexDirection: 'row',  
-backgroundColor: '#ffffff'
-},
-container3: {
-flex: 1, 
-flexDirection: 'row',  
-backgroundColor: '#ffffff',
-marginTop: 140
-},
-view: {
-width: '42%', 
-height: 120, 
-backgroundColor: '#ffffff', 
-marginTop: 20, 
-marginLeft: 20, 
-borderRadius: 10,
-shadowRadius: 1,
-shadowOpacity: 0.1
-},
-image: {
-width: 150, 
-height: 150, 
-borderRadius:60,  
-marginTop: 30, 
-marginLeft: 130
-},
-image2: {
-width: '50%', 
-height: '60%' , 
-marginTop: 10, 
-marginLeft: '40%'  
-},
-image3: {
-width: '50%', 
-height: '68%' , 
-marginTop: 5, 
-marginLeft: '40%'  
-},
-heading: {
-fontSize: 25, 
-fontWeight:'bold', 
-marginTop: 30,
-marginLeft: 30, 
-textAlign: 'center'
-},
-heading2:{
-fontSize: 15, 
-fontWeight:'300', 
-marginTop: 15, 
-color: '#000000', 
-textAlign: 'left', 
-marginLeft: 10 
-},
-subheading:{
-fontSize: 13, 
-fontWeight: '200', 
-marginTop: 10, 
-marginLeft: 30, 
-textAlign: 'center'
-},
-subheading2:{
-fontSize: 13, 
-fontWeight: '200', 
-marginTop: 15, 
-marginLeft: 30, 
-textAlign: 'left'
-},
-subheading3: {
-fontSize: 15, 
-fontWeight: '300', 
-marginTop: 15,
-marginLeft: 30,
-marginRight: 30
-},
-button: {
-backgroundColor: "blue",
-padding: 20,
-marginTop: 50,
-borderRadius: 5,
-},
-buttonText: {
-fontSize: 20,
-color: '#fff',
-}
+  container: {
+  
+    backgroundColor: '#E8D3B4',
+    justifyContent: 'center'
+  },
+  container2: {
+    width: 400,
+    paddingLeft: 20,
+    height: 450,
+    marginTop: 30,
+    borderRadius: 40,
+    paddingBottom: 30,
+     backgroundColor: '#B6A07E'
+   },
+   container3: { 
+    flex: 1, 
+    flexDirection: 'row',  
+    height: 120, 
+    justifyContent: 'center',
+    backgroundColor: 'black', 
+    marginTop: 10, 
+    borderRadius: 60,
+    marginLeft: 10,
+    padding: 10,
+   },
+   container4: {
+    flex: 1, 
+    flexDirection: 'row',  
+    width: 200,
+    paddingLeft: 10,
+    height: 300,
+    borderRadius: 40,
+     backgroundColor: '#B6A07E'
+   },
+   card: {  
+    height: 60, 
+    width: 400,
+    justifyContent: 'center',
+    backgroundColor: 'black', 
+    marginTop: 30, 
+    borderRadius: 60,
+    marginLeft: 10,
+    padding: 10,
+   },
+  heading: {
+    fontSize: 35,
+    fontWeight: 'bold',
+    color: '#000000',
+    marginTop: 20
+  },
+  fontText1: {
+    fontFamily: 'OleoScript-Regular',
+    fontSize: 40,
+    textAlign: 'center',
+    paddingLeft: 20,
+    marginTop: 10
+  },
+  fontText2: {
+    fontFamily: 'Montserrat-Regular',
+    fontSize: 13,
+    width: 300,
+    textAlign: 'center',
+    marginTop: 10,
+    marginLeft: 50,
+    marginBottom: 10
+  },
+  fontText3: {
+    fontFamily: 'OleoScript-Regular',
+    fontSize: 30,
+    paddingTop: 30,
+    paddingLeft: 100,
+    justifyContent: 'center'
+  },
+  CompButton: {
+    height: 60, 
+    width: 150,
+    justifyContent: 'center',
+    backgroundColor: 'white', 
+    marginTop: 30, 
+    borderRadius: 20,
+    borderColor: 'black',
+    borderWidth: 3,
+    justifyContent: 'center',
+    marginLeft: 10,
+    paddingTop: 10,
+    color: '#fff',
+    fontFamily: 'Montserrat-Regular',
+    fontSize: 25,
+    paddingLeft: 20
+  },
+  CompButton2: {
+    height: 60, 
+    width: 150,
+    justifyContent: 'center',
+    backgroundColor: 'white', 
+    marginTop: 30, 
+    borderRadius: 20,
+    borderColor: 'black',
+    borderWidth: 3,
+    justifyContent: 'center',
+    marginLeft: 10,
+    paddingTop: 10,
+    color: '#fff',
+    fontFamily: 'Montserrat-Regular',
+    fontSize: 25,
+    paddingLeft: 55
+  }
 });
