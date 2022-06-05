@@ -17,6 +17,11 @@ import Profile from './UserDetail';
 import Competitions from './CompList';
 import Design from './DesignComp';
 import Product from './ProductDetail';
+import Splash from '../autocomps/Splash';
+
+// React.useLayoutEffect(() => {
+//   navigation.setOptions({headerShown: false});
+// }, [navigation]);
 
 const Stack = createNativeStackNavigator();
 
@@ -25,6 +30,8 @@ const Tab = createBottomTabNavigator();
 export default function UserStack() {
 
   const [loggedIn, setLoggedIn] = useState (false);
+
+  
 
   useEffect(() => {
       const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -39,7 +46,7 @@ export default function UserStack() {
 
   return (
 
-    <Tab.Navigator initialRouteName='Navbar'
+    <Tab.Navigator options={{headerShown: false}} style={{backgroundColor: "#E8D3B4"}}
 
         screenOptions={({ route }) => ({
       tabBarIcon: ({ focused, color, size }) => {
@@ -70,21 +77,10 @@ export default function UserStack() {
       
       </>
       ): (
-        <Tab.Screen name ="Navbar" component={AuthTabs} options={{headerShown: false}}/>
+        <Tab.Screen name =" " component={Splash} options={{headerShown: false}} style={{backgroundColor: "#E8D3B4"}}/>
         )}
    </Tab.Navigator>
    
-    // <Stack.Navigator initialRouteName='Authentication'>
-    // {loggedIn ? (
-    //  <>
-    //        <Stack.Screen name ="Users" component={CompList}/>
-    //        <Stack.Screen name ="Profile" component={UserDetail} initialParams={{ name: "No User found", role: "Unknown"}}/>
-    //        </>
-    //      ): (
-    //        <Stack.Screen name ="Authentication" component={AuthTabs} options={{headerShown: false}}/>
-    //        )}
-    //    </Stack.Navigator>
-       
   );
 }
 

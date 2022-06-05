@@ -14,6 +14,8 @@ export default function Login({navigation}) {
         .then((userCredentials) => {
             const user = userCredentials.user;
             Alert.alert(user.uid);
+
+            navigation.replace('CompList');
           
         })
         .catch((error) => {

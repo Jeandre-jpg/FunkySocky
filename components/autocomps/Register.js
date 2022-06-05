@@ -70,26 +70,6 @@ return (
           secureTextEntry={true}
     />
 
-{/* <Dropdown>
-  <DropdownToggle variant="success" id="dropdown-basic">
-   Role
-  </DropdownToggle>
-
-  <DropdownMenu>
-    <Dropdown.Item 
-          value={adminrole}
-          onChangeText={onAdminRoleChange}
-          secureTextEntry={true}>Admin
-          </Dropdown.Item>
-
-          <Dropdown.Item 
-          value={studentrole}
-          onChangeText={onStudentRoleChange}
-          secureTextEntry={true}>Student
-          </Dropdown.Item>
-  </DropdownMenu>
-</Dropdown> */}
-
 <View style={{ backgroundColor: '#E8D3B4', flexDirection: 'row', marginTop: -5}}>
 
 <TouchableOpacity onPress={handleRegisterPress}>

@@ -15,6 +15,7 @@ export default function AuthTabs() {
 
 
   return (
+    
     <Tab.Navigator
         screenOptions={({ route }) => ({
           tabBarIcon: ({ focused, color, size }) => {
