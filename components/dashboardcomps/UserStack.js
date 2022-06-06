@@ -77,7 +77,13 @@ export default function UserStack() {
       
       </>
       ): (
-        <Tab.Screen name =" " component={Splash} options={{headerShown: false}} style={{backgroundColor: "#E8D3B4"}}/>
+        <>
+         <Tab.Screen name="AuthTabs" component={AuthTabs} options={{title: "AuthTabs", headerTintColor:"#E8D3B4", headerStyle: {backgroundColor: '#E8D3B4'}}}></Tab.Screen>
+         <Tab.Screen name =" " component={Splash} options={{headerShown: false}} style={{backgroundColor: "#E8D3B4"}}/>
+        </>
+       
+        
+       
         )}
    </Tab.Navigator>
    
