@@ -21,7 +21,7 @@ export default function Splash({ navigation }) {
           <Text style={styles.fontText1}>Welcome fellow Funky Socky!</Text>
           <Image source={landing} style={styles.card}></Image>
           <Text style={styles.fontText2}>Life is worth the living with a pair! So grab your funky sockies today.</Text>
-          <TouchableOpacity  onPress={() => navigation.navigate('AuthTabs')}>
+          <TouchableOpacity  onPress={() => navigation.navigate('Login')}>
             <Text style={styles.goButton}>Let's go!</Text>
         </TouchableOpacity>
     </View>

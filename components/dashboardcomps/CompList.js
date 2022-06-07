@@ -13,9 +13,31 @@ export default function CompList({ navigation }) {
         {name: 'Save Our Soles', role: 'Upcoming'},
         {name: 'Satisfeet', role: 'Closed'}
     ]
+    const [users, setUsers]= useState([]);
+    const collectionRef = getAllComp();
+    const collectionRef2 = getAvatar();
+    const unsubscribe = onSnapshot(collectionRef, (snapshot) =>{
+        let compsData = []
+         snapshot.forEach((doc) =>{
+            
+
+        let comp ={
+            ...doc.data(),
+            id: doc.id
+        }
+        compsData.push(comp)
+    })
+
+       
+        setComps(compsData);
+    })
+
+
+
+
     
 const onSignOutPress = () => {
-//success
+
         signOut(auth).then(() => {
             
         }).catch((error) => {
@@ -41,7 +63,7 @@ const onSignOutPress = () => {
 <View style={styles.container2}>
         <ScrollView style={{paddingBottom: 130}}>
             {competitions. map((competition, index) => (
-            <TouchableOpacity key={index} onPress={() => navigation.navigate("Product")}>
+            <TouchableOpacity key={index} onPress={() => navigation.navigate('Product')}>
                 <View key={index} style={styles.cardHold}>
                     <Text style={styles.card}>{competition.name}</Text>
                     <Image source={compIcon} style={styles.card2}/>
@@ -51,13 +73,8 @@ const onSignOutPress = () => {
             
         </ScrollView>
 
-</View>
-
-
-      
-
-
-                
+</View>   
+    
     </View>
   );
 }
