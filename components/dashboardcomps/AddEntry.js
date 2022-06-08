@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, Button, View, Image} from 'react-native';
+import { StyleSheet, Text, Button, View, Image, useState} from 'react-native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import designIcon from '../../assets/socksUpload.png';
 import * as ImagePicker from 'expo-image-picker';
@@ -11,29 +11,105 @@ import { storage } from '../../firebase';
 import { getDownloadURL, uploadBytes } from 'firebase/storage';
 
 
-const AddDesign = ({route, navigation}) => {
+  export const AddEntry = ({navigation}) => {
 
+    const [name, setName] = useState("")
+    const [description, setDescription] = useState("")
+    const [mode, setMode] = useState("")
+    const [image, setImage] = useState("/")
 
-  const id = route.params.id
-  const [title, onChangeTitle] = React.useState('')
-  const [image, setImage] = React.useState("/")
+    const enterComp = async() =>{
+      await addEntryToComp(id);
+      setActive("true");
+      updatecompetitionUsersCount(id, {currentplayers:comps.currentplayers+1})
+   
+   
+   }
 
-  const pickImage = async () => {
-      // No permissions request is necessary for launching the image library
-      let result = await ImagePicker.launchImageLibraryAsync({
-        mediaTypes: ImagePicker.MediaTypeOptions.All,
-        allowsEditing: true,
-        aspect: [4, 3],
-        quality: 1,
-      });
+    const newEntry = async() =>{
+        await handleImageUpload()
+    }
+
+    const pickImage = async () => {
+        let result = await ImagePicker.launchImageLibraryAsync({
+          mediaTypes: ImagePicker.MediaTypeOptions.All,
+          allowsEditing: true,
+          aspect: [4, 3],
+          quality: 1,
+        });
+    
+        console.log(result);
+    
+        if (!result.cancelled) {
+          setImage(result.uri);
+        }
+      };
   
-      console.log(result);
-  
-      if (!result.cancelled) {
-        setImage(result.uri);
-      }
-    };
 
+    const handleImageUpload = async() =>{
+        const image = ref(storage, 'images/'+ title+'added'+ Timestamp.fromDate(new Date()) + ".jpg" )
+     
+       
+        const blob = await new Promise((resolve, reject) => {
+            const xhr = new XMLHttpRequest();
+            xhr.onload = function () {
+              resolve(xhr.response);
+            };
+            xhr.onerror = function (e) {
+              console.log(e);
+              reject(new TypeError("Network request failed"));
+            };
+            xhr.responseType = "blob";
+            xhr.open("GET", image, true);
+            xhr.send(null);
+        });
+     
+       
+     
+     
+        await uploadBytes(image, blob).then((snapshot) => {
+            getDownloadURL(snapshot.ref).then((url) => {
+              console.log(url)
+     
+                  const newDocRef = doc(collection(db, "entries"));
+                   setDoc(
+                         newDocRef,
+                         {
+                            title: title,
+                            Description:description,
+                            mode:mode,
+                            image:url,
+                            id: newDocRef.id
+      
+                         }
+                     )
+     
+                  })
+             
+             .catch((error) => console.log(error))
+         })
+    .catch((error) => console.log(error))
+        // We're done with the blob, close and release it
+        blob.close();
+        navigation.pop();
+        }
+    
+
+    const saveEntry = async () => {
+
+        const data ={
+            name: name,
+            description: description,
+            mode: mode,
+            image: image,
+            userId: auth.currentUser.uid
+        }
+
+        console.log(data);
+        await newEntry(data);
+
+        navigation.goBack()
+    }
 
 
   return(
@@ -50,12 +126,17 @@ const AddDesign = ({route, navigation}) => {
          </TextInput>
          <Image source={{uri: image}} style={{height: 300, aspectRatio: 'fit'}}></Image>
          <Button title='Upload Feature Image' color="red" onPress={pickImage}></Button>
-         <Button title='Save' color="purple" onPress={AddDesign}></Button>
+         <TouchableOpacity onPress={()=> enterComp()}>
+                        <View style={styles.container2}>
+                        <Text style={styles.fontText3}>Enter Tournament</Text>
+                    </View>
+                      </TouchableOpacity>
      </View>
   )
 }
 
-export default AddDesign
+
+export default AddEntry
   
   const styles = StyleSheet.create({
   

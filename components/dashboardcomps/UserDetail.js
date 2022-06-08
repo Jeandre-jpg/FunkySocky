@@ -1,21 +1,16 @@
 import React, { useState, useEffect} from 'react';
 import { auth } from '../../firebase';
-import { StyleSheet, Text, Button, SafeAreaView, View, TouchableOpacity, Image} from 'react-native';
+import { StyleSheet, Text, useFocusEffect, SafeAreaView, View, TouchableOpacity, Image, ScrollView} from 'react-native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { getAvatar } from '../../Database';
+import { getAvatar, getAllComps, updateProfile } from '../../Database';
 import addIcon from '../../assets/add.png';
 import avatarIcon from '../../assets/man.png';
 
 const Stack = createNativeStackNavigator();
 
-const competitions = [
-  {name: 'Spring Hickety', role: 'Open'}
-]
 
+export default function UserDetail({ navigation }) {
 
-export default function UserDetail({ route, navigation }) {
-
-    const currentProfile = route.params;
 
     const [avatar, setAvatars]= useState([]);
 
@@ -47,38 +42,31 @@ export default function UserDetail({ route, navigation }) {
 <Text style={styles.fontText2}>Life is worth the living with a pair! So grab your funky sockies today.</Text> 
 
 
-
 <SafeAreaView style={styles.container2}>
 <Text style={styles.fontText3}>What's going on</Text> 
 <SafeAreaView style={styles.card}>
 <Text style={{color: 'white', fontFamily: 'OleoScript-Regular', fontSize: 20, paddingLeft: 20}}>Current Competitions</Text>
 </SafeAreaView>
-<View style={styles.container4}>
-  {competitions. map((competition, index) => (
-            <TouchableOpacity key={index} onPress={() => navigation.navigate("Product")}>
-                <View key={index} style={styles.CompButton}>
-                    <Text>{competition.name}</Text>
-                    <Text>{competitions.role}</Text>
-                </View>
-                </TouchableOpacity>
-                
-            ))}
 
-{competitions. map((competition, index) => (
-            <TouchableOpacity key={index} onPress={() => navigation.navigate("CompList")}>
-                <View key={index} style={styles.CompButton}>
-                    <Text>See More</Text>
-                    <Text>{competitions.role}</Text>
+{/* <View style={styles.container2}>
+        <ScrollView style={{paddingBottom: 130}}>
+            {comps. map((comps, index) => (
+            <TouchableOpacity key={index} onPress={() => navigation.navigate('Product')}>
+                <View key={index} style={styles.cardHold}>
+                    <Text style={styles.card}>{comps.name}</Text>
+                    <Image source={compIcon} style={styles.card2}/>
                 </View>
-                </TouchableOpacity>
-                
+            </TouchableOpacity>
             ))}
-            </View>
+            
+        </ScrollView>
+
+</View>    */}
 
 <SafeAreaView style={styles.card}>
 <Text style={{color: 'white', fontFamily: 'OleoScript-Regular', fontSize: 20, paddingLeft: 20}}>Current Entries</Text>
 </SafeAreaView>
-<View style={styles.container4}>
+{/* <View style={styles.container4}>
 {competitions. map((add, index) => (
             <TouchableOpacity key={index} onPress={() => navigation.navigate("CompList")}>
                 <View key={index} style={styles.CompButton2}>
@@ -88,7 +76,7 @@ export default function UserDetail({ route, navigation }) {
                 </TouchableOpacity>
                 
             ))}
-            </View>
+            </View> */}
 
 </SafeAreaView>
 

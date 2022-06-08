@@ -4,35 +4,45 @@ import { signOut } from 'firebase/auth';
 import { auth } from '../../firebase';
 import signOutIcon from '../../assets/exit.png';
 import socksIcon from '../../assets/sock.png';
-import compIcon from '../../assets/comp1.jpeg';
+import { getAllComps, getAvatar } from '../../Database';
+import { useFocusEffect } from '@react-navigation/native'
+import { onSnapshot } from 'firebase/firestore';
 
 export default function CompList({ navigation }) {
 
-    const competitions = [
-        {name: 'Spring Hickety', role: 'Open'},
-        {name: 'Save Our Soles', role: 'Upcoming'},
-        {name: 'Satisfeet', role: 'Closed'}
-    ]
-    const [users, setUsers]= useState([]);
-    const collectionRef = getAllComp();
-    const collectionRef2 = getAvatar();
-    const unsubscribe = onSnapshot(collectionRef, (snapshot) =>{
-        let compsData = []
-         snapshot.forEach((doc) =>{
-            
 
-        let comp ={
-            ...doc.data(),
-            id: doc.id
-        }
-        compsData.push(comp)
-    })
+  const [comps, setComps]= useState([]);
+   
+    useFocusEffect(
+        
+      React.useCallback(() => {
+        
+          const collectionRef = getAllComps();
+          const unsubscribe = onSnapshot(collectionRef, (snapshot) =>{
+              let compsData = []
+               snapshot.forEach((doc) =>{
+              //     
+  
+              let comp ={
+                  ...doc.data(),
+                  id: doc.id
+              }
+              compsData.push(comp)
+          })
+  
+             
+              setComps(compsData);
+          })
 
-       
-        setComps(compsData);
-    })
-
-
+          
+          return () =>
+          {
+              unsubscribe();
+          }
+         
+      },[])
+      
+  )
 
 
     
@@ -62,11 +72,11 @@ const onSignOutPress = () => {
 
 <View style={styles.container2}>
         <ScrollView style={{paddingBottom: 130}}>
-            {competitions. map((competition, index) => (
+            {comps. map((comps, index) => (
             <TouchableOpacity key={index} onPress={() => navigation.navigate('Product')}>
                 <View key={index} style={styles.cardHold}>
-                    <Text style={styles.card}>{competition.name}</Text>
-                    <Image source={compIcon} style={styles.card2}/>
+                    <Text style={styles.card}>{comps.name}</Text>
+                    <Image source={{uri: comps.image}} style={styles.card2}/>
                 </View>
             </TouchableOpacity>
             ))}

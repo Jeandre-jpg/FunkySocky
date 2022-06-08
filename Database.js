@@ -38,7 +38,7 @@ export const newComp = (comp) => {
     return addDoc( collection(db, 'comps'), comp )
 }
 
-export const getAllComp = () => {
+export const getAllComps = () => {
     return collection(db, "comps");
 }
 
@@ -57,7 +57,7 @@ export const getEntryOffComp = async(id) => {
 }
 
 export const addEntryToComp = (data, id) => {
-    const collectionRef = collection(db, 'comp/' + id + '/entries')
+    const collectionRef = collection(db, 'comps/' + id + '/entries')
 
     return addDoc(collectionRef, data)
 }

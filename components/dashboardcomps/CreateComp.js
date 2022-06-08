@@ -1,20 +1,21 @@
 import { StyleSheet, Text, View, TextInput, Button, TouchableOpacity, Image } from 'react-native'
 import React, {useState} from 'react'
-import { newComp } from '../../Database'
 import { auth } from '../../firebase'
 import designIcon from '../../assets/socksUpload.png';
 import * as ImagePicker from 'expo-image-picker';
+import { newComp, getAllComp} from '../../Database';
 
 
 export const CreateComp = ({navigation}) => {
-    
+
+
     
     const [name, setName] = useState("")
     const [description, setDescription] = useState("")
     const [mode, setMode] = useState("")
     const [image, setImage] = useState("/")
 
-    const addCompetition = async() =>{
+    const newComp = async() =>{
         await handleImageUpload()
     }
 
@@ -83,7 +84,7 @@ export const CreateComp = ({navigation}) => {
         }
     
 
-    
+        
 
     const saveComp = async () => {
 
@@ -133,7 +134,7 @@ export const CreateComp = ({navigation}) => {
         {/* <Image source={designIcon} style={{width: 50, height: 50, justifyContent: 'center', marginLeft: 10, marginTop: 50}}/> */}
      <Text style={styles.fontText1}>Upload Design</Text>
       <TouchableOpacity onPress={pickImage}>
-          <Image source={{uri: image}} source={designIcon} style={styles.thumbnail}/>
+          <Image source={{uri: image}} style={styles.thumbnail}/>
     </TouchableOpacity>
    
   
