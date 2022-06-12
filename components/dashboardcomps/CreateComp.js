@@ -3,7 +3,7 @@ import React, {useState} from 'react'
 import { auth } from '../../firebase'
 import designIcon from '../../assets/socksUpload.png';
 import * as ImagePicker from 'expo-image-picker';
-import { newComp, getAllComp} from '../../Database';
+import { getAllComp} from '../../Database';
 
 
 export const CreateComp = ({navigation}) => {
@@ -128,11 +128,10 @@ export const CreateComp = ({navigation}) => {
       />
              <TouchableOpacity  onPress={saveComp}>
                 <View style={styles.CompButton}>
-                <Text style={styles.fontText4}>Submit Entry</Text>
+                <Text style={styles.fontText4}>Create a Competition</Text>
               </View>  
      </TouchableOpacity>
-        {/* <Image source={designIcon} style={{width: 50, height: 50, justifyContent: 'center', marginLeft: 10, marginTop: 50}}/> */}
-     <Text style={styles.fontText1}>Upload Design</Text>
+     <Text style={styles.fontText1}>Upload Competition Banner</Text>
       <TouchableOpacity onPress={pickImage}>
           <Image source={{uri: image}} style={styles.thumbnail}/>
     </TouchableOpacity>

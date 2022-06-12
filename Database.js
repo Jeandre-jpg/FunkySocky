@@ -10,17 +10,18 @@ export const createUserOnRegister = (user, username) => {
     const userData = {
         email: user.email,
         username: username,
-        uid: user.uid
-    }//add own for app
+        uid: user.uid,
+        role: 'student',
+        dateCreated: Timestamp.fromDate(new Date())
+    }
 
     return setDoc(userRef, userData);
 }
 
 export const getAvatar = async () => {
 
-    const ref = doc(db, "avatars", auth.currentUser.uid);
-    const snap = await getDoc(ref);
-
+    const userRef = doc(db, "avatars", auth.currentUser.uid);
+    const snap = await getDoc(userRef);
 
   
     let avatar = {...doc.data(), uid: doc.id}
@@ -37,7 +38,7 @@ export const newComp = (comp) => {
     return addDoc( collection(db, 'comps'), comp )
 }
 
-export const getAllComps = () => {
+export const getAllComp = () => {
     return collection(db, "comps");
 }
 
@@ -56,8 +57,7 @@ export const getEntryOffComp = async(id) => {
 }
 
 export const addEntryToComp = (data, id) => {
-    const collectionRef = collection(db, 'comps/' + id + '/entries')
+    const collectionRef = collection(db, 'comp/' + id + '/entries')
 
     return addDoc(collectionRef, data)
-
 }

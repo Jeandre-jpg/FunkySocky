@@ -4,7 +4,7 @@ import { signOut } from 'firebase/auth';
 import { auth } from '../../firebase';
 import signOutIcon from '../../assets/exit.png';
 import socksIcon from '../../assets/sock.png';
-import { getAllComps } from '../../Database';
+import { getAllComp } from '../../Database';
 import { useFocusEffect } from '@react-navigation/native'
 import { onSnapshot } from 'firebase/firestore';
 import compIcon from '../../assets/comp1.jpeg';
@@ -13,17 +13,12 @@ export default function CompList({ navigation }) {
 
   const [comps, setComps]= useState([]);
 
-  const competitions = [
-    {name: 'Spring Hickety', role: 'Open'},
-    {name: 'Save Our Soles', role: 'Upcoming'},
-    {name: 'Satisfeet', role: 'Closed'}
-]
-   
+
     useFocusEffect(
         
       React.useCallback(() => {
         
-          const collectionRef = getAllComps();
+          const collectionRef = getAllComp();
           const unsubscribe = onSnapshot(collectionRef, (snapshot) =>{
               let compsData = []
                snapshot.forEach((doc) =>{
@@ -77,10 +72,10 @@ const onSignOutPress = () => {
 
 <View style={styles.container2}>
         <ScrollView style={{paddingBottom: 130}}>
-            {competitions. map((competition, index) => (
+            {comps. map((comps, index) => (
             <TouchableOpacity key={index} onPress={() => navigation.navigate('Product')}>
                 <View key={index} style={styles.cardHold}>
-                    <Text style={styles.card}>{competition.name}</Text>
+                    <Text style={styles.card}>{comps.name}</Text>
                     <Image source={compIcon} style={styles.card2}/>
                     </View>
                     </TouchableOpacity>

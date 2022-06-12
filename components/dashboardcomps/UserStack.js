@@ -17,6 +17,8 @@ import Competitions from './CompList';
 import Design from './DesignComp';
 import Product from './ProductDetail';
 import Splash from '../autocomps/Splash';
+import Login from '../autocomps/Login';
+import Register from '../autocomps/Register';
 
 // React.useLayoutEffect(() => {
 //   navigation.setOptions({headerShown: false});
@@ -45,46 +47,20 @@ export default function UserStack() {
 
   return (
 
-    <Tab.Navigator options={{headerShown: false}} style={{backgroundColor: "#E8D3B4"}}
-
-        screenOptions={({ route }) => ({
-      tabBarIcon: ({ focused, color, size }) => {
-        let iconName;
-
-           if (route.name === "Competitions"){
-            iconName = focused
-                return <Image source={comps} style={{width: 20, height: 20}}/>
-           }else if (route.name === "Profile"){
-               return <Image source= {profile} style={{width: 20, height: 20}}/>
-          } else if (route.name === "Design"){       
-              return <Image source= {design} style={{width: 20, height: 20}}/>
-          } else if (route.name === "Product"){       
-            return <Image source= {product} style={{width: 20, height: 20}}/>
-          }
-
-       },
-       tabBarActiveTintColor: 'black'
-   })}>
-      {loggedIn ? (
-        <>
-         <Tab.Screen name="Competitions" component={Competitions}options={{title: "Competitions", headerTintColor:"#E8D3B4", headerStyle: {backgroundColor: '#E8D3B4'}}}></Tab.Screen>
-        <Tab.Screen name="Product" component={Product}options={{title: "Product", headerTintColor:"#E8D3B4", headerStyle: {backgroundColor: '#E8D3B4'}}}></Tab.Screen>
-        <Tab.Screen name="Design" component={Design}options={{title: "Design", headerTintColor:"#E8D3B4", headerStyle: {backgroundColor: '#E8D3B4'}}}></Tab.Screen>
-        <Tab.Screen name="Profile" component={Profile} options={{title: "Profile", headerTintColor:"#E8D3B4", headerStyle: {backgroundColor: '#E8D3B4'}}}></Tab.Screen>
-       
-     
-      
+    <Stack.Navigator>
+    {!loggedIn ? ( 
+      <>
+            <Stack.Screen name ="Splash" component={Splash} options={{headerShown: false}} style={{backgroundColor: "#E8D3B4"}}/>
+             <Stack.Screen name ="Login" component={Login} options={{headerShown: false}} style={{backgroundColor: "#E8D3B4"}}/>
+             <Stack.Screen name ="Register" component={Register} options={{headerShown: false}} style={{backgroundColor: "#E8D3B4"}}/>
+    
       </>
-      ): (
-        <>
-         <Tab.Screen name="AuthTabs" component={AuthTabs} options={{title: "AuthTabs", headerTintColor:"#E8D3B4", headerStyle: {backgroundColor: '#E8D3B4'}}}></Tab.Screen>
-         <Tab.Screen name =" " component={Splash} options={{headerShown: false}} style={{backgroundColor: "#E8D3B4"}}/>
-        </>
-       
-        
-       
-        )}
-   </Tab.Navigator>
+    ):(
+      <>
+     <Stack.Screen name="Authentication" component={AuthTabs} options={ {headerShown: false}} />
+      </>
+      )}
+    </Stack.Navigator>
    
   );
 }
