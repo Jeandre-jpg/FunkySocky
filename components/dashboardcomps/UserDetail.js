@@ -1,5 +1,6 @@
-import React, { useState, useEffect} from 'react';
+import React, { useEffect} from 'react';
 import { auth } from '../../firebase';
+import {useState} from 'react'
 import { StyleSheet, Text, useFocusEffect, SafeAreaView, View, TouchableOpacity, Image, ScrollView} from 'react-native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { getAvatar, getAllComps, updateProfile } from '../../Database';

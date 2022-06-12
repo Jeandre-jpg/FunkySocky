@@ -9,6 +9,7 @@ import landing from '../../assets/landing.jpeg';
 
 import Login from './Login';
 import Register from './Register';
+import { ScrollView } from 'react-native-gesture-handler';
 
 
 const Tab = createBottomTabNavigator();
@@ -17,14 +18,14 @@ const Tab = createBottomTabNavigator();
 export default function Splash({ navigation }) {
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
           <Text style={styles.fontText1}>Welcome fellow Funky Socky!</Text>
           <Image source={landing} style={styles.card}></Image>
           <Text style={styles.fontText2}>Life is worth the living with a pair! So grab your funky sockies today.</Text>
           <TouchableOpacity  onPress={() => navigation.navigate('Login')}>
             <Text style={styles.goButton}>Let's go!</Text>
         </TouchableOpacity>
-    </View>
+    </ScrollView>
   );
 }
 
