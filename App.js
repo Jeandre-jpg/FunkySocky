@@ -1,10 +1,10 @@
-import { StyleSheet, Text, View } from 'react-native';
-import * as SplashScreen from 'expo-splash-screen';
-import { NavigationContainer } from '@react-navigation/native';
 import React, {useState} from 'react';
+import { StyleSheet, Text, View, TouchableOpacity, ScrollView, Button, Image} from 'react-native';
 import AppLoading from 'expo-app-loading';
 import useFonts from './assets/hooks/useFonts';
 import UserStack from './components/dashboardcomps/UserStack';
+import * as SplashScreen from 'expo-splash-screen'; 
+import { NavigationContainer } from '@react-navigation/native';
 
 export default function App() {
 

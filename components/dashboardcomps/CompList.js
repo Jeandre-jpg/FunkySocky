@@ -4,14 +4,20 @@ import { signOut } from 'firebase/auth';
 import { auth } from '../../firebase';
 import signOutIcon from '../../assets/exit.png';
 import socksIcon from '../../assets/sock.png';
-import { getAllComps, getAvatar } from '../../Database';
+import { getAllComps } from '../../Database';
 import { useFocusEffect } from '@react-navigation/native'
 import { onSnapshot } from 'firebase/firestore';
+import compIcon from '../../assets/comp1.jpeg';
 
 export default function CompList({ navigation }) {
 
-
   const [comps, setComps]= useState([]);
+
+  const competitions = [
+    {name: 'Spring Hickety', role: 'Open'},
+    {name: 'Save Our Soles', role: 'Upcoming'},
+    {name: 'Satisfeet', role: 'Closed'}
+]
    
     useFocusEffect(
         
@@ -21,7 +27,6 @@ export default function CompList({ navigation }) {
           const unsubscribe = onSnapshot(collectionRef, (snapshot) =>{
               let compsData = []
                snapshot.forEach((doc) =>{
-              //     
   
               let comp ={
                   ...doc.data(),
@@ -45,9 +50,9 @@ export default function CompList({ navigation }) {
   )
 
 
-    
-const onSignOutPress = () => {
 
+const onSignOutPress = () => {
+//success
         signOut(auth).then(() => {
             
         }).catch((error) => {
@@ -72,20 +77,17 @@ const onSignOutPress = () => {
 
 <View style={styles.container2}>
         <ScrollView style={{paddingBottom: 130}}>
-            {comps. map((comps, index) => (
+            {competitions. map((competition, index) => (
             <TouchableOpacity key={index} onPress={() => navigation.navigate('Product')}>
                 <View key={index} style={styles.cardHold}>
-                    <Text style={styles.card}>{comps.name}</Text>
-                    <Image source={{uri: comps.image}} style={styles.card2}/>
-                </View>
-            </TouchableOpacity>
+                    <Text style={styles.card}>{competition.name}</Text>
+                    <Image source={compIcon} style={styles.card2}/>
+                    </View>
+                    </TouchableOpacity>
             ))}
-            
-        </ScrollView>
-
-</View>   
-    
-    </View>
+          </ScrollView>
+          </View>
+          </View>
   );
 }
 const styles = StyleSheet.create({
