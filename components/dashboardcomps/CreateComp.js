@@ -6,8 +6,9 @@ import designIcon from '../../assets/socksUpload.png';
 import * as ImagePicker from 'expo-image-picker';
 
 
-export const CreateComp = ({navigation}) => {
+export const CreateComp = ({route, navigation}) => {
     
+  console.log(route)
     
     const [name, setName] = useState("")
     const [description, setDescription] = useState("")
@@ -133,13 +134,13 @@ export const CreateComp = ({navigation}) => {
           <Image source={designIcon} style={styles.thumbnail}/>
     </TouchableOpacity>
      <Text style={styles.fontText1}>Upload Design</Text>
-     <View style={styles.container3}>
+    
      <TouchableOpacity  onPress={saveComp}>
                 <Text style={styles.fontText2}>Create Competition</Text>             
-     </TouchableOpacity>
+</TouchableOpacity>
      </View>
   </View>
-    </View>
+
   )
 }
 

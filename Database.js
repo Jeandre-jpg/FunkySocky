@@ -49,11 +49,11 @@ export const getAllAvatars = async () => {
 }
   
 //set our profiles data
-export const updatecompetitionUsersCount = (id, data) => {
-    const userRef = doc(db, 'comps', id);
-    return updateDoc(userRef, data, { merge: true });//option to merge and not overrite
+// export const updatecompetitionUsersCount = (id, data) => {
+//     const userRef = doc(db, 'comps', id);
+//     return updateDoc(userRef, data, { merge: true });//option to merge and not overrite
   
-  }
+//   }
 
 export const updateProfile = (uid, data) => {
     const userRef = doc(db, 'avatars', uid)
@@ -86,7 +86,7 @@ export const getAllComp = () => {
     
 //   }
 
-export const addEntryToComp = async(id) => {
+export const getEntryOffComp = async(id) => {
     let entries = []
 
     const collectionRef = collection(db, 'comps/' + id + '/entries')
@@ -97,4 +97,10 @@ export const addEntryToComp = async(id) => {
     })
 
     return entries
+}
+
+export const addEntryToComp = (data, id) => {
+   
+    // return addDoc(collection(db, 'comps/' + id + '/entries'), data)
+    return addDoc(collection(db, 'yoda'), data)
 }

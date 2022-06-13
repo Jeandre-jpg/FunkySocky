@@ -66,7 +66,7 @@ export default function CompDetail({ navigation }) {
                             <Text style={{color: 'white', fontFamily: 'OleoScript-Regular', fontSize: 20, paddingLeft: 20}}>Enter competition</Text>
                         </SafeAreaView>
                     </View>
-                    <TouchableOpacity  onPress={() => navigation.navigate('AddEntry')}>
+                    <TouchableOpacity  onPress={() => navigation.navigate('AddEntry', {id:comps.id})}>
                         <Text style={styles.goButton}>Let's go!</Text>
                     </TouchableOpacity>
                     </TouchableOpacity>

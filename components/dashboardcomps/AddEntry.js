@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet} from 'react-native';
+import { StyleSheet, View, Text, Image, Button} from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
 import addEntryToComp from '../../Database';
 import * as ImagePicker from 'expo-image-picker';
@@ -7,7 +7,7 @@ import { storage } from '../../firebase';
 import { getDownloadURL, uploadBytes } from 'firebase/storage';
 
 const AddEntry = ({route, navigation}) => {
-
+ 
 
   const id = route.params.id
   const [title, onChangeTitle] = React.useState('')
@@ -27,7 +27,7 @@ const AddEntry = ({route, navigation}) => {
       if (!result.cancelled) {
         setImage(result.uri);
       }
-    };
+    }; 
 
   const AddEntry = async() => {
       let imageUrl = await handleImageUpload()
@@ -65,89 +65,68 @@ const AddEntry = ({route, navigation}) => {
 
 
     return(
+      <View style={styles.container}>
        <View>
            <Text>Add Entry</Text>
            <Text>{id}</Text>
 
            <TextInput
-           style={styles.input}
+        style={styles.input}
            onChangeText={onChangeTitle}
            value={title}
            placeholder='Entry Title'
            keyboardType='default'>
            </TextInput>
 
-           <TextInput
-           style={styles.input}
-           onChangeText={setDescription}
-           value={description}
-           placeholder='Entry description'
-           keyboardType='default'>
-           </TextInput>
-
-           <TextInput
-           style={styles.input}
-           onChangeText={setMode}
-           value={mode}
-           placeholder='Entry mode'
-           keyboardType='default'>
-           </TextInput>
+         
 
            <Image source={{uri: image}} style={{height: 300, aspectRatio: 'fit'}}></Image>
            <Button title='Upload Entry Image' color="red" onPress={pickImage}></Button>
            <Button title='Save' color="purple" onPress={AddEntry}></Button>
+       </View>
        </View>
     )
 }
 
 export default AddEntry
 
-  const styles = StyleSheet.create({
-  
-    container: {
-      flex: 1, alignItems: 'center', justifyContent: 'center',
+const styles = StyleSheet.create({
+  input: {
+      borderWidth: 2,
+      padding: 10,
+      marginTop: 20,
+      borderRadius: 30,
+      paddingLeft: 20,
+      width: 200,
+      borderColor: 'black'
+  },
+  container: {
+      flex: 1, 
+      alignItems: 'center',
+      justifyContent: 'center',
       backgroundColor: '#E8D3B4',
-      justifyContent: 'center'
+      justifyContent: 'center',
+      paddingTop: 30
     },
     container2: {
       width: 400,
-      paddingLeft: 20,
-      height: 450,
+      height: 600,
+      justifyContent: 'center',
       marginTop: 30,
+      padding: 40,
       borderRadius: 40,
-      paddingBottom: 30,
        backgroundColor: '#B6A07E'
      },
      container3: { 
-      flex: 1, 
-      flexDirection: 'row',  
-      height: 120, 
+      height: 50, 
+      width: 300,
       justifyContent: 'center',
-      backgroundColor: 'black', 
+      backgroundColor: 'white', 
       marginTop: 10, 
+      color: 'black',
       borderRadius: 60,
-      marginLeft: 10,
-      padding: 10,
-     },
-     container4: {
-      flex: 1, 
-      flexDirection: 'row',  
-      width: 200,
-      paddingLeft: 10,
-      height: 300,
-      borderRadius: 40,
-       backgroundColor: '#B6A07E'
-     },
-     container5: {
-      flex: 1, alignItems: 'center', justifyContent: 'center',
-      width: 400,
-      paddingLeft: 20,
-      height: 500,
-      borderRadius: 40,
-      paddingBottom: 30,
-      backgroundColor: '#E8D3B4',
-      justifyContent: 'center',
-      backgroundColor: 'black'
+      marginLeft: 20,
+      padding: 30,
      },
      card: {  
       height: 90, 
@@ -168,22 +147,6 @@ export default AddEntry
       marginLeft: 10,
       padding: 10,
      },
-    heading: {
-      fontSize: 15,
-      color: '#000000',
-      fontFamily: 'Montserrat-Regular',
-      marginTop: 20,
-      width: 320,
-      marginLeft: 20
-    },
-    heading2: {
-      fontSize: 15,
-      color: 'white',
-      fontFamily: 'Montserrat-Regular',
-      marginTop: 20,
-      width: 320,
-      marginLeft: 20
-    },
     fontText1: {
       fontFamily: 'OleoScript-Regular',
       fontSize: 40,
@@ -198,29 +161,26 @@ export default AddEntry
       textAlign: 'center',
       marginTop: 10,
       marginLeft: 10,
-      marginBottom: 10
+      marginBottom: 10,
+      color: 'black'
     },
     fontText3: {
       fontFamily: 'OleoScript-Regular',
       fontSize: 25,
-      paddingTop: -20,
-      paddingLeft: -10,
-      justifyContent: 'center'
+      justifyContent: 'center',
+      color: 'white'
     },
-    fontText4: {
-      fontFamily: 'OleoScript-Regular',
-      fontSize: 20,
-      paddingLeft: -50,
-      paddingTop: -20,
-    },
-    thumbnail: {
-      width: 300,
-      height: 300,
-      resizeMode: "contain"
+      thumbnail: {
+      width: 150,
+      height: 150,
+      marginLeft: 100,
+      resizeMode: "contain",
+      paddingTop: 10
     },
     CompButton: {
       height: 60, 
       width: 160,
+      marginLeft: 20,
       justifyContent: 'center',
       backgroundColor: 'white', 
       marginTop: 30, 
@@ -229,26 +189,9 @@ export default AddEntry
       borderWidth: 3,
       justifyContent: 'center',
       marginLeft: 10,
-      color: '#fff',
+      color: 'white',
       fontFamily: 'Montserrat-Regular',
       fontSize: 25,
       paddingLeft: 20
-    },
-    CompButton2: {
-      height: 60, 
-      width: 150,
-      justifyContent: 'center',
-      backgroundColor: 'white', 
-      marginTop: 30, 
-      borderRadius: 20,
-      borderColor: 'black',
-      borderWidth: 3,
-      justifyContent: 'center',
-      marginLeft: 10,
-      paddingTop: 10,
-      color: '#fff',
-      fontFamily: 'Montserrat-Regular',
-      fontSize: 25,
-      paddingLeft: 55
     }
-  });
+})

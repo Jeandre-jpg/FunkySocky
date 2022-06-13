@@ -13,7 +13,7 @@ export default function CompList({ navigation }) {
 
   const [comps, setComps]= useState([]);
 
-
+console.log(comps)
   useFocusEffect(
     React.useCallback(() => {
       // Do something when the screen is focused
@@ -73,7 +73,7 @@ const onSignOutPress = () => {
             <TouchableOpacity key={index} onPress={() => navigation.navigate('CompDetail')}>
                 <View key={index} style={styles.cardHold}>
                     <Text style={styles.card}>{comps.name}</Text>
-                    <Image source={{uri: comps.image}} style={styles.card2}/>
+                    <Image source={{uri: comps.image}} style={styles.card2}/> 
                     </View>
                     </TouchableOpacity>
             ))}
