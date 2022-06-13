@@ -1,24 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet} from 'react-native';
-import { Button, Image, Alert, Text } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import profile from '../../assets/user.png';
-import comps from '../../assets/medal.png';
-import product from '../../assets/lamp.png';
-import design from '../../assets/edit.png';
-import add from '../../assets/add.png';
 import AuthTabs from '../autocomps/AuthTabs';
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from '../../firebase';
-
-import Profile from './UserDetail';
-import Competitions from './CompList';
-import Design from './DesignComp';
-import Product from './ProductDetail';
 import Splash from '../autocomps/Splash';
 import Login from '../autocomps/Login';
 import Register from '../autocomps/Register';
+import CompDetail from './CompDetail';
+import AddEntry from '../dashboardcomps/AddEntry';
 
 // React.useLayoutEffect(() => {
 //   navigation.setOptions({headerShown: false});
@@ -58,6 +49,8 @@ export default function UserStack() {
     ):(
       <>
      <Stack.Screen name="Authentication" component={AuthTabs} options={ {headerShown: false}} />
+     <Stack.Screen name="CompDetail" component={CompDetail} options={ {headerShown: false}} />
+     <Stack.Screen name="AddEntry" component={AddEntry} options={ {headerShown: false}} />
       </>
       )}
     </Stack.Navigator>

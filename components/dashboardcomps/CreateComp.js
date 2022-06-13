@@ -1,21 +1,20 @@
 import { StyleSheet, Text, View, TextInput, Button, TouchableOpacity, Image } from 'react-native'
 import React, {useState} from 'react'
+import { newComp } from '../../Database'
 import { auth } from '../../firebase'
 import designIcon from '../../assets/socksUpload.png';
 import * as ImagePicker from 'expo-image-picker';
-import { getAllComp} from '../../Database';
 
 
 export const CreateComp = ({navigation}) => {
-
-
+    
     
     const [name, setName] = useState("")
     const [description, setDescription] = useState("")
     const [mode, setMode] = useState("")
     const [image, setImage] = useState("/")
 
-    const newComp = async() =>{
+    const addCompetition = async() =>{
         await handleImageUpload()
     }
 
@@ -84,7 +83,7 @@ export const CreateComp = ({navigation}) => {
         }
     
 
-        
+    
 
     const saveComp = async () => {
 
@@ -104,7 +103,9 @@ export const CreateComp = ({navigation}) => {
 
   return (
     <View style={styles.container}>
- <Text style={styles.heading2}>
+        <Text style={styles.fontText1}>Create a Competition</Text>
+        <View style={styles.container2}>
+ <Text style={styles.fontText2}>
        This Sock Contest is an annual competition where we invite you to share your amazing art and tell us what should go on our next great sock!
   </Text>
   
@@ -126,17 +127,18 @@ export const CreateComp = ({navigation}) => {
         value={mode}
         placeholder="Mode of Competition"
       />
-             <TouchableOpacity  onPress={saveComp}>
-                <View style={styles.CompButton}>
-                <Text style={styles.fontText4}>Create a Competition</Text>
-              </View>  
-     </TouchableOpacity>
-     <Text style={styles.fontText1}>Upload Competition Banner</Text>
-      <TouchableOpacity onPress={pickImage}>
-          <Image source={{uri: image}} style={styles.thumbnail}/>
-    </TouchableOpacity>
+             
    
-  
+     <TouchableOpacity onPress={pickImage}>
+          <Image source={designIcon} style={styles.thumbnail}/>
+    </TouchableOpacity>
+     <Text style={styles.fontText1}>Upload Design</Text>
+     <View style={styles.container3}>
+     <TouchableOpacity  onPress={saveComp}>
+                <Text style={styles.fontText2}>Create Competition</Text>             
+     </TouchableOpacity>
+     </View>
+  </View>
     </View>
   )
 }
@@ -149,53 +151,35 @@ const styles = StyleSheet.create({
         borderRadius: 30,
         paddingLeft: 20,
         width: "90%",
-        borderColor: '#FFE5B4'
+        borderColor: 'black'
     },
     container: {
-        flex: 1, alignItems: 'center', justifyContent: 'center',
+        flex: 1, 
+        alignItems: 'center',
+        justifyContent: 'center',
         backgroundColor: '#E8D3B4',
         justifyContent: 'center',
-        paddingTop: 300
+        paddingTop: 30
       },
       container2: {
         width: 400,
-        paddingLeft: 20,
-        height: 450,
+        height: 600,
+        justifyContent: 'center',
         marginTop: 30,
+        padding: 40,
         borderRadius: 40,
-        paddingBottom: 30,
          backgroundColor: '#B6A07E'
        },
        container3: { 
-        flex: 1, 
-        flexDirection: 'row',  
-        height: 120, 
+        height: 50, 
+        width: 300,
         justifyContent: 'center',
-        backgroundColor: 'black', 
+        backgroundColor: 'white', 
         marginTop: 10, 
+        color: 'black',
         borderRadius: 60,
-        marginLeft: 10,
-        padding: 10,
-       },
-       container4: {
-        flex: 1, 
-        flexDirection: 'row',  
-        width: 200,
-        paddingLeft: 10,
-        height: 300,
-        borderRadius: 40,
-         backgroundColor: '#B6A07E'
-       },
-       container5: {
-        flex: 1, alignItems: 'center', justifyContent: 'center',
-        width: 400,
-        paddingLeft: 20,
-        height: 500,
-        borderRadius: 40,
-        paddingBottom: 30,
-        backgroundColor: '#E8D3B4',
-        justifyContent: 'center',
-        backgroundColor: 'black'
+        marginLeft: 20,
+        padding: 30,
        },
        card: {  
         height: 90, 
@@ -216,22 +200,6 @@ const styles = StyleSheet.create({
         marginLeft: 10,
         padding: 10,
        },
-      heading: {
-        fontSize: 15,
-        color: '#000000',
-        fontFamily: 'Montserrat-Regular',
-        marginTop: 20,
-        width: 320,
-        marginLeft: 20
-      },
-      heading2: {
-        fontSize: 15,
-        color: 'white',
-        fontFamily: 'Montserrat-Regular',
-        marginTop: 20,
-        width: 320,
-        marginLeft: 20
-      },
       fontText1: {
         fontFamily: 'OleoScript-Regular',
         fontSize: 40,
@@ -246,44 +214,26 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         marginTop: 10,
         marginLeft: 10,
-        marginBottom: 10
+        marginBottom: 10,
+        color: 'black'
       },
       fontText3: {
         fontFamily: 'OleoScript-Regular',
         fontSize: 25,
-        paddingTop: -20,
-        paddingLeft: -10,
-        justifyContent: 'center'
+        justifyContent: 'center',
+        color: 'white'
       },
-      fontText4: {
-        fontFamily: 'OleoScript-Regular',
-        fontSize: 20,
-    
-      },
-      thumbnail: {
-        width: 300,
-        height: 300,
-        resizeMode: "contain"
+        thumbnail: {
+        width: 150,
+        height: 150,
+        marginLeft: 100,
+        resizeMode: "contain",
+        paddingTop: 10
       },
       CompButton: {
         height: 60, 
         width: 160,
-        justifyContent: 'center',
-        backgroundColor: 'white', 
-        marginTop: 50, 
-        borderRadius: 20,
-        borderColor: 'black',
-        borderWidth: 3,
-        justifyContent: 'center',
-        marginLeft: 10,
-        color: '#fff',
-        fontFamily: 'Montserrat-Regular',
-        fontSize: 25,
-        paddingLeft: 20
-      },
-      CompButton2: {
-        height: 60, 
-        width: 150,
+        marginLeft: 20,
         justifyContent: 'center',
         backgroundColor: 'white', 
         marginTop: 30, 
@@ -292,10 +242,9 @@ const styles = StyleSheet.create({
         borderWidth: 3,
         justifyContent: 'center',
         marginLeft: 10,
-        paddingTop: 10,
-        color: '#fff',
+        color: 'white',
         fontFamily: 'Montserrat-Regular',
         fontSize: 25,
-        paddingLeft: 55
+        paddingLeft: 20
       }
 })

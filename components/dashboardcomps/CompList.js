@@ -14,36 +14,33 @@ export default function CompList({ navigation }) {
   const [comps, setComps]= useState([]);
 
 
-    useFocusEffect(
-        
-      React.useCallback(() => {
-        
-          const collectionRef = getAllComp();
-          const unsubscribe = onSnapshot(collectionRef, (snapshot) =>{
-              let compsData = []
-               snapshot.forEach((doc) =>{
-  
-              let comp ={
+  useFocusEffect(
+    React.useCallback(() => {
+      // Do something when the screen is focused
+      const collectionRef = getAllComp()
+
+      const unsubscribe = onSnapshot(collectionRef, (snapshot) => {
+          let compsData = []
+          snapshot.forEach((doc) => {
+
+              let comp = {
                   ...doc.data(),
-                  id: doc.id
+                  id: doc.id,
               }
+
+
               compsData.push(comp)
           })
-  
-             
-              setComps(compsData);
-          })
 
-          
-          return () =>
-          {
-              unsubscribe();
-          }
-         
-      },[])
-      
-  )
+          console.log(compsData)
+          setComps(compsData)
+      })
 
+      return () => {
+        unsubscribe();
+    };
+}, [])
+);
 
 
 const onSignOutPress = () => {
@@ -73,10 +70,10 @@ const onSignOutPress = () => {
 <View style={styles.container2}>
         <ScrollView style={{paddingBottom: 130}}>
             {comps. map((comps, index) => (
-            <TouchableOpacity key={index} onPress={() => navigation.navigate('Product')}>
+            <TouchableOpacity key={index} onPress={() => navigation.navigate('CompDetail')}>
                 <View key={index} style={styles.cardHold}>
                     <Text style={styles.card}>{comps.name}</Text>
-                    <Image source={compIcon} style={styles.card2}/>
+                    <Image source={{uri: comps.image}} style={styles.card2}/>
                     </View>
                     </TouchableOpacity>
             ))}

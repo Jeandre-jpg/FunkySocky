@@ -10,9 +10,10 @@ import design from '../../assets/edit.png';
 import addnew from '../../assets/add.png';
 import Profile from '../dashboardcomps/UserDetail';
 import Competitions from '../dashboardcomps/CompList';
-import Design, { AddEntry } from '../dashboardcomps/AddEntry';
-import Product from '../dashboardcomps/ProductDetail';
+import ScoreBoard from '../dashboardcomps/ScoreBoard';
 import { CreateComp } from '../dashboardcomps/CreateComp';
+import CompDetail from '../dashboardcomps/CompDetail';
+import AddEntry from '../dashboardcomps/AddEntry';
 
 const Tab = createBottomTabNavigator();
 
@@ -29,31 +30,32 @@ export default function AuthTabs() {
 
         if (route.name === "Login"){
           iconName = focused
-              return <Image source={login} style={{width: 20, height: 20}}/>
+          return <Image source={login} style={{width: 20, height: 20}}/>
          }else if (route.name === "Competitions"){
-             return <Image source= {comps} style={{width: 20, height: 20}}/>
-        }else if (route.name === "Product"){
+          return <Image source= {comps} style={{width: 20, height: 20}}/>
+        }else if (route.name === "Score Board"){
           return <Image source= {product} style={{width: 20, height: 20}}/>
-        } else if (route.name === "Design"){
-          return <Image source= {design} style={{width: 20, height: 20}}/>
-        } else if (route.name === "Profile"){
+         } else if (route.name === "Profile"){
           return <Image source= {profile} style={{width: 20, height: 20}}/>
-        } else if (route.name === "New"){
+        } else if (route.name === "Create Competition"){
           return <Image source= {addnew} style={{width: 20, height: 20}}/>
-        } else if (route.name === "AddEntry"){
-          return <Image source= {design} style={{width: 20, height: 20}}/>
         }
+        // } else if (route.name === "AddEntry"){
+        //   return <Image source= {design} style={{width: 20, height: 20}}/>
+        // } else if (route.name === "CompDetail"){
+        //   return <Image source= {design} style={{width: 20, height: 20}}/>
+        // }
        },
        tabBarActiveTintColor: 'black'
    })}>
 
       
 <Tab.Screen name="Competitions" component={Competitions}options={{title: "Competitions", headerTintColor:"#E8D3B4", headerStyle: {backgroundColor: '#E8D3B4'}}}/>
-      <Tab.Screen name="Product" component={Product}options={{title: "Product", headerTintColor:"#E8D3B4", headerStyle: {backgroundColor: '#E8D3B4'}}}/>
-      <Tab.Screen name="Design" component={Design}options={{title: "Design", headerTintColor:"#E8D3B4", headerStyle: {backgroundColor: '#E8D3B4'}}}/>
-      <Tab.Screen name="Add Entry" component={AddEntry}options={{title: "Add Entry", headerTintColor:"#E8D3B4", headerStyle: {backgroundColor: '#E8D3B4'}}}/>
+      <Tab.Screen name="Score Board" component={ScoreBoard}options={{title: "Score Board", headerTintColor:"#E8D3B4", headerStyle: {backgroundColor: '#E8D3B4'}}}/>
       <Tab.Screen name="Profile" component={Profile} options={{title: "Profile", headerTintColor:"#E8D3B4", headerStyle: {backgroundColor: '#E8D3B4'}}}/>
-      <Tab.Screen name="New" component={CreateComp} options={{title: "New", headerTintColor:"#E8D3B4", headerStyle: {backgroundColor: '#E8D3B4'}}}/>
+      <Tab.Screen name="Create Competition" component={CreateComp} options={{title: "Create Competition", headerTintColor:"#E8D3B4", headerStyle: {backgroundColor: '#E8D3B4'}}}/>
+      {/* <Tab.Screen name="AddEntry" component={AddEntry} options={{title: "AddEntry", headerTintColor:"#E8D3B4", headerStyle: {backgroundColor: '#E8D3B4'}}}/>
+      <Tab.Screen name="CompDetail" component={CompDetail} options={{title: "CompDetail", headerTintColor:"#E8D3B4", headerStyle: {backgroundColor: '#E8D3B4'}}}/> */}
     </Tab.Navigator>    
 
   );

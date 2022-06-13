@@ -1,143 +1,107 @@
 import React from 'react';
-import { StyleSheet, Text, Button, View, Image, useState} from 'react-native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import designIcon from '../../assets/socksUpload.png';
+import { StyleSheet} from 'react-native';
+import { TextInput } from 'react-native-gesture-handler';
+import addEntryToComp from '../../Database';
 import * as ImagePicker from 'expo-image-picker';
-import * as Sharing from 'expo-sharing'; 
-import addIcon from '../../assets/add.png';
-import uploadToAnonymousFilesAsync from 'anonymous-files'; 
-import { addEntryToComp } from '../../Database';
 import { storage } from '../../firebase';
 import { getDownloadURL, uploadBytes } from 'firebase/storage';
 
+const AddEntry = ({route, navigation}) => {
 
-  export const AddEntry = ({navigation}) => {
 
-    const [name, setName] = useState("")
-    const [description, setDescription] = useState("")
-    const [mode, setMode] = useState("")
-    const [image, setImage] = useState("/")
+  const id = route.params.id
+  const [title, onChangeTitle] = React.useState('')
+  const [image, setImage] = React.useState("/")
 
-    const enterComp = async() =>{
-      await addEntryToComp(id);
-      setActive("true");
-      updatecompetitionUsersCount(id, {currentplayers:comps.currentplayers+1})
-   
-   
-   }
-
-    const newEntry = async() =>{
-        await handleImageUpload()
-    }
-
-    const pickImage = async () => {
-        let result = await ImagePicker.launchImageLibraryAsync({
-          mediaTypes: ImagePicker.MediaTypeOptions.All,
-          allowsEditing: true,
-          aspect: [4, 3],
-          quality: 1,
-        });
-    
-        console.log(result);
-    
-        if (!result.cancelled) {
-          setImage(result.uri);
-        }
-      };
+  const pickImage = async () => {
+      // No permissions request is necessary for launching the image library
+      let result = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.All,
+        allowsEditing: true,
+        aspect: [4, 3],
+        quality: 1,
+      });
   
+      console.log(result);
+  
+      if (!result.cancelled) {
+        setImage(result.uri);
+      }
+    };
 
-    const handleImageUpload = async() =>{
-        const image = ref(storage, 'images/'+ title+'added'+ Timestamp.fromDate(new Date()) + ".jpg" )
-     
-       
-        const blob = await new Promise((resolve, reject) => {
-            const xhr = new XMLHttpRequest();
-            xhr.onload = function () {
-              resolve(xhr.response);
-            };
-            xhr.onerror = function (e) {
-              console.log(e);
-              reject(new TypeError("Network request failed"));
-            };
-            xhr.responseType = "blob";
-            xhr.open("GET", image, true);
-            xhr.send(null);
+  const AddEntry = async() => {
+      let imageUrl = await handleImageUpload()
+      addEntryToComp({title, imageUrl}, id)
+  }
+
+  const handleImageUpload = async() => {
+      const imageRef = ref(storage, '/images/' + title + id + '.jpg')
+
+      const blob = await new Promise((resolve, reject) => {
+          const xhr = new XMLHttpRequest();
+          xhr.onload = function () {
+            resolve(xhr.response);
+          };
+          xhr.onerror = function (e) {
+            console.log(e);
+            reject(new TypeError("Network request failed"));
+          };
+          xhr.responseType = "blob";
+          xhr.open("GET", image, true);
+          xhr.send(null);
         });
-     
-       
-     
-     
-        await uploadBytes(image, blob).then((snapshot) => {
-            getDownloadURL(snapshot.ref).then((url) => {
+
+        await uploadBytes(imageRef, blob).then((snapshot) => {
+          getDownloadURL(snapshot.ref).then((url) => {
               console.log(url)
-     
-                  const newDocRef = doc(collection(db, "entries"));
-                   setDoc(
-                         newDocRef,
-                         {
-                            title: title,
-                            Description:description,
-                            mode:mode,
-                            image:url,
-                            id: newDocRef.id
-      
-                         }
-                     )
-     
-                  })
-             
-             .catch((error) => console.log(error))
-         })
-    .catch((error) => console.log(error))
-        // We're done with the blob, close and release it
-        blob.close();
-        navigation.pop();
-        }
-    
-
-    const saveEntry = async () => {
-
-        const data ={
-            name: name,
-            description: description,
-            mode: mode,
-            image: image,
-            userId: auth.currentUser.uid
-        }
-
-        console.log(data);
-        await newEntry(data);
-
-        navigation.goBack()
-    }
+              addEntryToComp({title: title, imageUrl: url}, id)
+          })
+          .catch((error) => console.log(error))
+      })
+      .catch((error) => console.log(error))
+// We're done with the blob, close and release it
+      blob.close();
+  }
 
 
-  return(
-     <View>
-         <Text>Add Entry</Text>
-         <Text>{id}</Text>
-         <TextInput
-         style={styles.input}
-         onChangeText={onChangeTitle}
-         value={title}
-         placeholder='Feature Title'
-         keyboardType='default'>
+    return(
+       <View>
+           <Text>Add Entry</Text>
+           <Text>{id}</Text>
 
-         </TextInput>
-         <Image source={{uri: image}} style={{height: 300, aspectRatio: 'fit'}}></Image>
-         <Button title='Upload Feature Image' color="red" onPress={pickImage}></Button>
-         <TouchableOpacity onPress={()=> enterComp()}>
-                        <View style={styles.container2}>
-                        <Text style={styles.fontText3}>Enter Tournament</Text>
-                    </View>
-                      </TouchableOpacity>
-     </View>
-  )
+           <TextInput
+           style={styles.input}
+           onChangeText={onChangeTitle}
+           value={title}
+           placeholder='Entry Title'
+           keyboardType='default'>
+           </TextInput>
+
+           <TextInput
+           style={styles.input}
+           onChangeText={setDescription}
+           value={description}
+           placeholder='Entry description'
+           keyboardType='default'>
+           </TextInput>
+
+           <TextInput
+           style={styles.input}
+           onChangeText={setMode}
+           value={mode}
+           placeholder='Entry mode'
+           keyboardType='default'>
+           </TextInput>
+
+           <Image source={{uri: image}} style={{height: 300, aspectRatio: 'fit'}}></Image>
+           <Button title='Upload Entry Image' color="red" onPress={pickImage}></Button>
+           <Button title='Save' color="purple" onPress={AddEntry}></Button>
+       </View>
+    )
 }
 
-
 export default AddEntry
-  
+
   const styles = StyleSheet.create({
   
     container: {
@@ -288,104 +252,3 @@ export default AddEntry
       paddingLeft: 55
     }
   });
-  
-   
-    
-
-  // const [selectedImage, setSelectedImage] = React.useState(null);
-
-
-  // let openImagePickerAsync = async () => {
-  //   let permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
-
-  //   if (permissionResult.granted === false) {
-  //     alert("Permission to access camera roll is required!");
-  //     return;
-  //   }
-
-  //   let pickerResult = await ImagePicker.launchImageLibraryAsync();
-  //   console.log(pickerResult);
-
- 
-  //   if (pickerResult.cancelled === true) {
-  //     return;
-  //   }
-
-  //   if (Platform.OS === 'web') {
-  //     let remoteUri = await uploadToAnonymousFilesAsync(pickerResult.uri);
-  //     setSelectedImage({ localUri: pickerResult.uri, remoteUri });
-  //   } else {
-  //     setSelectedImage({ localUri: pickerResult.uri, remoteUri: null });
-  //   } 
-  // };
-
-  // let openShareDialogAsync = async () => {
-  //   if (!(await Sharing.isAvailableAsync())) {
-  //     alert(`The image is available for sharing at: ${selectedImage.remoteUri}`);
-  //     return;
-  //   }
-
-  //   Sharing.shareAsync(selectedImage.remoteUri || selectedImage.localUri);
-  
-  // }; 
-  
-  // if (selectedImage !== null) {
-
-
-    //   <View style={styles.container}>
-    //     <Image source={{ uri: selectedImage.localUri }} style={styles.thumbnail} />
-
-      
-    //     <View style={styles.container5}>
-    //       {competitions. map((competition, index) => (
-    //         <TouchableOpacity key={index} onPress={() => navigation.navigate("Product")}>
-    //             <View key={index} style={styles.card}>
-    //                 <Text style={{color: 'white', fontFamily: 'OleoScript-Regular', fontSize: 40, paddingLeft: 20}}>{competition.name}</Text>
-    //             </View>
-    //             </TouchableOpacity>
-                      
-    //         ))}
-
-    //   <Text style={styles.heading2}>
-    //   This Sock Contest is an annual competition where we invite you to share your amazing art and tell us what should go on our next great sock!
-    //   </Text>
-
-    //   <View style={styles.card2}>
-    //                 <Text style={{color: 'white', fontFamily: 'OleoScript-Regular', fontSize: 20, paddingLeft: 20}}>Receive Notifications</Text>
-    //             </View>
-              
-
-    //         <TouchableOpacity onPress={() => navigation.navigate("Sucess")}>
-    //             <View style={styles.CompButton}>
-    //             <Text style={styles.fontText4}>Submit Entry</Text>
-    //             </View>
-    //             </TouchableOpacity>
-                
-        
-         
-    //  </View>
-    
-    //     </View>
-
-      //     return (
-  //       <View style={styles.container}>
-  //       <Image source={designIcon} style={{width: 150, height: 150, justifyContent: 'center', marginLeft: 10, marginTop: 50}}/>
-  //       <Text style={styles.fontText1}>Upload Design</Text>
-  //       <Text style={styles.fontText2}>
-  //     To share a photo for your profile, just press the button below!
-  //     </Text>
-
-  //     <TouchableOpacity onPress={openImagePickerAsync} style={styles.CompButton}>
-  //       <Text style={styles.fontText3}>Pick a Design</Text>
-  //     </TouchableOpacity>
-
-
-
-
-  
-  //   </View>
-  
-  
-  
-  
-  // );
