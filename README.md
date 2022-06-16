@@ -92,6 +92,7 @@ For this project, I chose to create a design-build competition around the design
       <ul>
          <li><a href="#mockups">Mockups</a></li>
          <li><a href="#video-demonstration">Video Demonstration</a></li>
+            <li><a href="#promotional-video">Promotional Video</a></li>
       </ul>
     </li>
     <ul>
@@ -261,7 +262,7 @@ Access your running application to the given **Hosting URL**.
 ### Highlights and Challenges
 
 <p align="center">
- <img src=""/> 
+ <img src="https://user-images.githubusercontent.com/55391556/174137775-161207d7-9507-46ac-b08b-a882d719737a.jpg"/> 
 </p>
 
 
@@ -276,41 +277,28 @@ Access your running application to the given **Hosting URL**.
 ### Mockups
 
 <p align="center">
- <img src=""/>
+ <img src="https://user-images.githubusercontent.com/55391556/174138027-60b8d381-8b76-4c0d-97f9-646a8a07c333.jpg"/>
 </p>
-
-<p align="center">
- <img src=""/>
-</p>
-
-<p align="center">
- <img src=""/> 
-</p>
-
-<p align="center">
- <img src=""/> 
-</p>
-
-<p align="center">
- <img src=""/> 
-
-
-
-
-
-
 
 ## Video Demonstration
 
 
 #### Final Video Demonstration:
 
-You can download the Video demonstration here [Demo]()
+You can download the Video demonstration here [Demo](https://drive.google.com/file/d/1OeJpJhC9_mO4kOGltBl0KI0_1XN37uVB/view?usp=sharing)
+
+#### Promotional Video
+
+You can download the Promotional demonstration here [Promo](https://drive.google.com/file/d/1OeJpJhC9_mO4kOGltBl0KI0_1XN37uVB/view?usp=sharing)
 
 ## Conclusion
 
 <p align="center">
+For this project, I chose to create a design-build competition around the designing and making of custom socks. 
 
+I felt that I aimed higher than my current skillset and capabilities this term. This really had a negative impact on my project in terms of time management and poor plaining skills. I do however feel that the work I've done was according to what was expected of me and look forward to working on this project again in terms of UI and functionality.
+
+I aim to put more research in my coming projects and plan far ahead to avoid mishaps and learn from this term's mistakes.
 </p>
 
 #### Download:
@@ -319,8 +307,8 @@ You can download the Video demonstration here [Demo]()
 
 ## Roadmap
 
-* **[C#](https://docs.microsoft.com/en-us/dotnet/csharp/)**
-* **[Official doc](https://docs.microsoft.com/en-us/dotnet/csharp/)**
+* [React Native](https://reactnative.dev/)
+* [Firebase](https://firebase.google.com/)
   
 
 ## Contributing
