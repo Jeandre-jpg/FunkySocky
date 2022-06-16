@@ -1,7 +1,8 @@
 {
   "expo": {
-    "name": "FunkySocky",
-    "slug": "FunkySocky",
+    "name": "Funky Socky",
+    "slug": "funkysocky",
+    "owner": "jeandrevd0",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
