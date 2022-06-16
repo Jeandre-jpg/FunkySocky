@@ -6,71 +6,73 @@ import { onSnapshot } from 'firebase/firestore';
 import socksIcon from '../../assets/sock.png';
 import compIcon from '../../assets/comp1.jpeg';
 
-export default function CompDetail({ navigation }) {
+export default function CompDetail({ route, navigation }) {
 
-    const peers = [
-        {name: 'Bob', role: 'Open'}
-    ]
+    // const peers = [
+    //     {name: 'Bob', role: 'Open'}
+    // ]
 
-    const [comps, setComps]= useState([]);
+    // const [comps, setComps]= useState([]);
 
 
-    useFocusEffect(
-      React.useCallback(() => {
-        // Do something when the screen is focused
-        const collectionRef = getAllComp()
+  //   useFocusEffect(
+  //     React.useCallback(() => {
+  //       // Do something when the screen is focused
+  //       const collectionRef = getAllComp()
   
-        const unsubscribe = onSnapshot(collectionRef, (snapshot) => {
-            let compsData = []
-            snapshot.forEach((doc) => {
+  //       const unsubscribe = onSnapshot(collectionRef, (snapshot) => {
+  //           let compsData = []
+  //           snapshot.forEach((doc) => {
   
-                let comp = {
-                    ...doc.data(),
-                    id: doc.id,
-                }
+  //               let comp = {
+  //                   ...doc.data(),
+  //                   id: doc.id,
+  //               }
   
   
-                compsData.push(comp)
-            })
+  //               compsData.push(comp)
+  //           })
   
-            console.log(compsData)
-            setComps(compsData)
-        })
+  //           console.log(compsData)
+  //           setComps(compsData)
+  //       })
   
-        return () => {
-          unsubscribe();
-      };
-  }, [])
-  );
+  //       return () => {
+  //         unsubscribe();
+  //     };
+  // }, [])
+  // );
     
+  const comp = route.params;
+
 
   return (
 
 <View style={styles.container}>
         <ScrollView style={{paddingBottom: 130}}>
-            {comps. map((comps, index) => (
-            <TouchableOpacity key={index} onPress={() => navigation.navigate('CompDetail')}>
-                <View key={index}>
+           
+            <TouchableOpacity  onPress={() => navigation.navigate('CompDetail')}>
+                <View>
                     <View style={styles.container2}>
-                        <Image source={{uri: comps.image}} style={{width: '100%', height: "100%", marginTop: 10}}/>
+                        <Image source={{uri: comp.image}} style={{width: '100%', height: "100%", marginTop: 10}}/>
                         </View>
-                        <Text style={styles.fontText1}>{comps.name}</Text>
+                        <Text style={styles.fontText1}>{comp.name}</Text>
                         <SafeAreaView style={styles.card}>
                             <Text style={{color: 'white', fontFamily: 'OleoScript-Regular', fontSize: 20, paddingLeft: 20}}>About</Text>
                         </SafeAreaView>
-                        <Text style={styles.fontText2}>{comps.description}</Text>
+                        <Text style={styles.fontText2}>{comp.description}</Text>
                         <View  style={styles.CompButton}>
-                            <Text>{comps.mode}</Text>
+                            <Text>{comp.mode}</Text>
                         </View>
                         <SafeAreaView style={styles.card}>
                             <Text style={{color: 'white', fontFamily: 'OleoScript-Regular', fontSize: 20, paddingLeft: 20}}>Enter competition</Text>
                         </SafeAreaView>
                     </View>
-                    <TouchableOpacity  onPress={() => navigation.navigate('AddEntry', {id:comps.id})}>
+                    <TouchableOpacity  onPress={() => navigation.navigate('AddEntry', {id:comp.id})}>
                         <Text style={styles.goButton}>Let's go!</Text>
                     </TouchableOpacity>
                     </TouchableOpacity>
-            ))}
+           
           </ScrollView>
           </View>
       

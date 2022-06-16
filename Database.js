@@ -49,12 +49,6 @@ export const getAllAvatars = async () => {
 }
   
 //set our profiles data
-// export const updatecompetitionUsersCount = (id, data) => {
-//     const userRef = doc(db, 'comps', id);
-//     return updateDoc(userRef, data, { merge: true });//option to merge and not overrite
-  
-//   }
-
 export const updateProfile = (uid, data) => {
     const userRef = doc(db, 'avatars', uid)
     return setDoc(userRef, data, {merge: true}) 
@@ -65,6 +59,7 @@ export const newComp = (comp) => {
     return addDoc( collection(db, 'comps'), comp )
 }
 
+//returns our collection reference that we want to listen for real updates
 export const getAllComp = () => {
     return collection(db, "comps");
 }
@@ -86,21 +81,28 @@ export const getAllComp = () => {
     
 //   }
 
-export const getEntryOffComp = async(id) => {
+
+//get feat of a project
+export const getEntryOffComp =async (id) =>{
     let entries = []
 
-    const collectionRef = collection(db, 'comps/' + id + '/entries')
-    const collectionSnapshot = await getDocs(collection(db, 'entries'))
+    const collectionRef = collection(db, "comps/"+id+"/entries")
+    const collectionSnapshot = await getDocs(collectionRef)
 
-    collectionSnapshot.forEach((doc) => {
-        entries.push(doc.data());
+    collectionSnapshot.forEach((doc) =>{
+        entries.push(doc.data())
     })
-
     return entries
+    
 }
 
-export const addEntryToComp = (data, id) => {
-   
-    // return addDoc(collection(db, 'comps/' + id + '/entries'), data)
-    return addDoc(collection(db, 'yoda'), data)
+
+
+export const addEntryToComp = (data, id) =>{
+    console.log(id)
+    const collectionRef = collection(db, "comps/"+id+"/entries")
+ 
+    return addDoc(collectionRef,data)
+
 }
+
